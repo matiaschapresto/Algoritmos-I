@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="..\src\Test.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="627" topLine="213" />
+	</File>
+	<File name="..\src\Test.h" open="0" top="0" tabpos="8">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="..\src\habitacion.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="787" topLine="9" />
+	</File>
+	<File name="..\src\habitacion.h" open="0" top="0" tabpos="9">
+		<Cursor position="911" topLine="1" />
+	</File>
+	<File name="..\src\hotel.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="9369" topLine="261" />
+	</File>
+	<File name="..\src\hotel.h" open="1" top="0" tabpos="1">
+		<Cursor position="1769" topLine="15" />
+	</File>
+	<File name="..\src\interfaz.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="16899" topLine="605" />
+	</File>
+	<File name="..\src\interfaz.h" open="0" top="0" tabpos="11">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="..\src\lista.h" open="0" top="0" tabpos="12">
+		<Cursor position="219" topLine="0" />
+	</File>
+	<File name="..\src\mainHoteles.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="528" topLine="32" />
+	</File>
+	<File name="..\src\ministerio.cpp" open="0" top="0" tabpos="6">
+		<Cursor position="4787" topLine="150" />
+	</File>
+	<File name="..\src\ministerio.h" open="0" top="0" tabpos="13">
+		<Cursor position="1708" topLine="5" />
+	</File>
+	<File name="..\src\reserva.cpp" open="0" top="0" tabpos="7">
+		<Cursor position="1854" topLine="55" />
+	</File>
+	<File name="..\src\reserva.h" open="0" top="0" tabpos="14">
+		<Cursor position="828" topLine="0" />
+	</File>
+	<File name="..\src\tipos.h" open="0" top="0" tabpos="15">
+		<Cursor position="459" topLine="0" />
+	</File>
+</CodeBlocks_layout_file>

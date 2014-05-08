@@ -1,0 +1,14 @@
+\begin{tipo}{MinisterioDeTurismo}
+	\observador{secretarias}{m: MinisterioDeTurismo}{[Provincia]}
+	\observador{registro}{m: MinisterioDeTurismo, p: Provincia }{[Hotel]}
+	\requiere{p \in secretarias(m)}
+	\observador{cadenasDeHoteles}{m: MinisterioDeTurismo}{[[Hotel]]}	
+	\invariante[sinHotelesRepetidos]{(\forall xs \selec cadenasDeHoteles(m)) sinRepetidos(xs)}
+	\invariante[sinCadenasRepetidas]{sinRepetidos(\comp{cadena(xs_0)}{xs \selec cadenasDeHoteles(m)})}
+	\invariante[sinProvinciasRepetidas]{sinRepetidos(secretarias(m))}
+	\input{secciones/turismo/cadenasBienFormadas.tex}
+	\input{secciones/turismo/sinNombresRepetidosEnCadenas.tex}
+	\input{secciones/turismo/hotelesConsistentes.tex}
+	\invariante[cadenasConHoteles]{(\forall xs \selec cadenasDeHoteles(m))|xs| > 0}
+
+\end{tipo}

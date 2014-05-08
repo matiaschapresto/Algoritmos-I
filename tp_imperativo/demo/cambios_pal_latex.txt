@@ -1,0 +1,9 @@
+cambios pal latex
+
+sacarRepetidos: agrego const en el argumento dnis
+
+hayReserva: agrego const en los argumentos ingreso y checkOut
+
+noHaySalidaEnElMedio: agrego const a los argumentos ci, co
+
+sacarRepetidos, Pc=>I: cambiar "Se infiere directo" por "Por poscondición del problema longitud(), definido en la especificación."

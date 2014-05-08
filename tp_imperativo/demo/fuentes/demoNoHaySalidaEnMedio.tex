@@ -1,0 +1,77 @@
+\small Las implicaciones mas importantes estan en \textcolor{NavyBlue}{AZUL}\\
+\small Referirse a los estados mas arriba cuando sea necesario\\
+\vspace{2mm}
+
+\subsection{Pc $ \Rightarrow $ I}
+\begin{itemize}
+	\item $ ^1 $ \textcolor{NavyBlue}{$(longitud == |salidas(this)|)$} \checkmark
+	\item $ ^2 $ i == 0 $ \Rightarrow $ i $ \leq $ longitud
+	\item $ ^2 $ i == 0  $ \Rightarrow $ 0 $ \leq $ i
+	\item \textcolor{NavyBlue}{0 $ \leq $ i $ \leq $ longitud} \checkmark
+	\item \textcolor{NavyBlue}{result == [] == (( $ \exists $ co $ \selec $ $ salidas(this)_{[0..0)} $), prm(co) == prm(ci))$ fechaCheckIn(ci) < fechaCheckOut(co) < fechaCheckOut(o)) $ $ \land $ 0$ \leq $i$ \leq $n $ \land $ longitud == $|$salidas(this)$|$} \checkmark
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Por poscondición del problema \emph{longitud} definido para el tipo Lista.\\
+$ ^2 $ Porque longitud $\geq$ 0 (por ser $longitud == |salidas(this)|$) y por propiedades de los números naturales\\
+$ ^3 $ Existencial de vacio es false pues como i == 0, $ salidas(this)_{[0..i)} $ == [ ]\\
+
+\subsection{(I $ \land $ $ \lnot $B) $ \Rightarrow $ Qc}
+\begin{itemize}
+	\item $ ^1 $ (I $ \land $ $ \lnot $B) $ \Rightarrow $ i == longitud
+	\item $ ^2 $ result == (( $ \exists $ co $ \selec $ $ salidas(this)_{[0..longitud)} $), prm(co) == prm(ci)) $ fechaCheckIn(ci) < fechaCheckOut(co) < fechaCheckOut(o)) $ $ \land $ 0$ \leq $i$ \leq $n $ \land $ longitud == $|$salidas(this)$|$
+	\item $ ^2 $ \textcolor{NavyBlue}{ result == (( $ \exists $ co $ \selec $ $ salidas(this) $), prm(co) == prm(ci)) $ fechaCheckIn(ci) < fechaCheckOut(co) < fechaCheckOut(o)) $ $ \land $ 0$ \leq $i$ \leq $n $ \land $ longitud == $|$salidas(this)$|$} \checkmark
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Se infiere de I\\
+
+\subsection{Funcion variante decrece}
+\begin{itemize}
+	\item Fv: longitud - i
+	\item $ i@e4 == i@e3 + 1== i@e2 + 1 == i@e1 + 1 $
+	\item $ ^1 $ $ i@e4 > i@e1 $
+	\item $ ^1 $ $ - i@e4 < - i@e1 $
+	\item $ ^2 $ \textcolor{NavyBlue}{ $ longitud - i@e4 < longitud - i@e1 $} \checkmark	
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Sumando longitud a ambos lados\\
+
+\subsection{I $ \land $ $ Fv \leq Cota $ $ \Rightarrow $ $ \lnot $ B}
+\begin{itemize}
+	\item Fv: longitud - i
+	\item Cota: 0
+	\item Fv $ \leq $ Cota $ \Rightarrow $ $ longitud - i \leq 0 $ 
+	\item longitud $ \leq $ i
+	\item B: i $ < $ longitud $ \Rightarrow $ $ \lnot $ B: longitud $ \leq $ i
+	\item \textcolor{NavyBlue}{ $ \lnot $ B $ \Leftrightarrow $ Fv  $ \leq $ Cota} \checkmark	
+\end{itemize}
+\vspace{3mm}
+
+\subsection{El cuerpo del ciclo preserva el invariante}
+\begin{itemize}
+	\item $ ^1 $ $ ^2 $ 0 $ \leq $ i@e1 $ \Rightarrow $ 0 $ \leq $ i@e1 + 1
+	\item $ ^3 $ 0 $ \leq $ i@e4
+	\item $ ^1 $ $^2 $ i@e1 $ < $ longitud $ \Rightarrow $ i@e1 + 1 $ < $ longitud + 1
+	\item $ ^3 $ i@e4 $ \leq $ longitud	
+	\item \textcolor{NavyBlue}{0 $ \leq $ i@e4 $ \leq $ longitud} \checkmark	
+	\item $ ^2 $ result@e1 == (($ \exists $ co $ \selec $ $salidas(h)_{[0..i@E1)}$), prm(co) == prm(ci)) fechaCheckIn(ci)$ < $fechaCheckOut(co)$ < $fechaCheckOut(o)) $ \land $ 0$\leq$i$\leq$n $ \land $ longitud == $|$salidas(this)$|$
+	\item $ ^5 $ $ ^6 $ $ ^7 $ result == (($ \exists $ co $ \selec $ $salidas(this)_{[0..i@E1)}$), prm(co) == prm(ci))\\
+fechaCheckIn(ci) $<$ fechaCheckOut(co) $<$ fechaCheckOut(o)) $ \lor $ (prm(oco) == prm(ci) $ \land $ sgd(ci) $<$ sgd(oco) $ \land $ sgd(oco) $<$ sgd(co))\\
+	\item $ ^8 $ result == (($ \exists $ co $ \selec $ $salidas(this)_{[0..i@E1 + 1)}$), prm(co) == prm(ci)) fechaCheckIn(ci)$ < $fechaCheckOut(co)$ < $fechaCheckOut(o)) $ \land $ 0$\leq$i$\leq$n $ \land $ longitud == $|$salidas(this)$|$
+	\item $ ^3 $\textcolor{NavyBlue}{ result == (($ \exists $ co $ \selec $ $salidas(this)_{[0..i@E4)}$), prm(co) == prm(ci)) fechaCheckIn(ci)$ < $fechaCheckOut(co)$ < $fechaCheckOut(o)) $ \land $ 0$\leq$i$\leq$n $ \land $ longitud == $|$salidas(this)$|$} \checkmark
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Vale I $ \land $ B en e1\\
+$ ^3 $ i@e4 == i@e1 + 1\\
+$ ^4 $ Por propiedad de existencial e intervalos podemos incluirlo\\
+$ ^5 $ En E2 vale: i == i@E1 $\land$ result == result@E1 $ \land $ oco == $salidas_i$\\
+$ ^6 $ En E3: vale result == result@E2 $\lor$ (prm(oco) == prm(ci) $\land$ sgd(ci) $<$ sgd(oco) $\land$ sgd(oco) $<$ sgd(co))\\
+$ ^7 $ (Reemplazando result@E2==result@E1)En E3 vale: result == (($ \exists $ co $ \selec $ $salidas(this)_{[0..i@E1)}$), prm(co) == prm(ci)) fechaCheckIn(ci) $<$ fechaCheckOut(co) $<$ fechaCheckOut(o)) $ \lor $ (prm(oco) == prm(ci) $ \land $ sgd(ci) $<$ sgd(oco) $ \land $ sgd(oco) $<$ sgd(co)) \\
+$ ^8 $ Siendo oco $salidas_i$, entonces tenemos el existencial hasta i@E1 abierto, y tenemos un or con la condicion de $ salidas(this)_{i@E1} $, podemos meterlo dentro del existencial\\
+$ ^9 $ Propiedades de intervalos\\

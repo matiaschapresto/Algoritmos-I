@@ -1,0 +1,208 @@
+\subsubsection{Observaciones}
+\begin{enumerate}
+	\item El método es declarado const; es decir, this no se modifica. En particular, los valores de \emph{ingresos(this)}, \emph{salidas(this)} y \emph{reservas(this)} tampoco son modificados a lo largo de los estados.
+	\item Por la poscondici\'on del problema \emph{longitud} definido sobre el tipo Lista, la expresi\'on \emph{this$\rightarrow$\_ingresos.longitud()} \\ es igual a \ensuremath{|ingresos(this)|}.
+	\item Las siguientes expresiones son equivalentes para el caso particular de este problema:
+		\begin{itemize}
+			\itemexpr{Expresión original de la especificación que se muestra en la sección anterior}{
+				[ prm(prm(in)) | in  \selec  ingresos(this)_{[0..i)}, co  \selec  salidasDe(this,prm(prm(in))), \\ 
+				noHaySalidaEnElMedio(prm(in),co,this), hayReserva(in,co,this)]
+			}
+			\itemexpr{Tomando el total de las salidas, y utilizando como primera condici\'on un filtro sobre el DNI:}{
+				[ prm(prm(in)) | in  \selec  ingresos(this)_{[0..i)}, co  \selec  salidas(this), prm(prm(in)) == prm(co), \\
+		      noHaySalidaEnElMedio(prm(in),co,this), hayReserva(in,co,this)]
+			}
+			\itemexpr{Condensando las tres condiciones en una sola}{[ prm(prm(in)) | in  \selec  ingresos(this)_{[0..i)}, co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+		      \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+      		}
+		\end{itemize}
+\end{enumerate}
+
+\subsubsection{Definiciones}
+\begin{itemize}
+	\itemexpr{Pc:}{i == 0 \land result == []}
+	\itemexpr{I:}{
+		0 \leq i \leq |ingresos(this)|  \land \\
+		result == [ prm(prm(in)) | in  \selec  ingresos(this)_{[0..i)}, co  \selec  salidas(this), prm(prm(in)) == prm(co) \land \\ noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+	}
+	\itemexpr{Qc:}{
+		result == [ prm(prm(in)) | in  \selec  ingresos(this), co  \selec  salidas(this), prm(prm(in)) == prm(co) \land \\ noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+	}
+	\itemexpr{B:}{
+		i < |ingresos(this)|
+	}
+	\itemexpr{Fv (cota == 0):}{
+		this\rightarrow\_ingresos.longitud() - i
+	}
+\end{itemize}
+
+\subsubsection{Transición de estados}
+\begin{itemize}
+	  \itemexpr{En e1 vale:}{
+	  i == 0 \land result == []
+		}
+	  \itemexpr{En e2 vale:}{
+	  	B \land I: \\
+		    i < |ingresos(this)| \land \\
+		    0 \leq i \leq |ingresos(this)|  \land \\
+		    result == [ prm(prm(in)) | in  \selec  ingresos(this)_{[0..i)}, co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+		        \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+		}
+	  \itemexpr{En e3 vale:}{
+	  	    i == i@e2 \land \\
+		    result == result@e2 \masmas [ prm(prm(in)) | in  \selec  [ingresos(this)_{i@e2}], co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+		        \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)] ^1
+		}
+	  \itemexpr{En e4 vale:}{
+	  	    i == i@e3 + 1 \land \\
+	    	result == result@e3
+		}
+	  \itemexpr{En e5 vale:}{
+		  Qc: \\
+		    result == [ prm(prm(in)) | in  \selec  ingresos(this), co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+		          \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+		}
+	  \itemexpr{En e6 vale:}{
+	  	    result == sacarRepetidos(result@e5) ^2
+	  	}
+\end{itemize}
+
+\noindent $ ^1 $ Por poscondición del problema \emph{concatenar} definido sobre el tipo Lista, y el problema \emph{procesarIesimoIngreso}, especificado posteriormente.\\
+\noindent $ ^2 $ Por poscondición del problema \emph{sacarRepetidos}, especificado posteriormente.\\
+
+\subsubsection{Demostración de terminación y correctitud para el ciclo}
+\begin{itemize}
+	\item Pc $\rightarrow$ I
+		\begin{itemize}
+			\itemexpr{como i == 0, por propiedad de enteros}{0 \leq i}
+			\itemexpr{además, por propiedad de listas}{i == 0 \leq |ingresos(this)|}
+			\itemexpr{entonces, uniendo ambas proposiciones}{\textcolor{NavyBlue}{0 \leq i \leq |ingresos(this)|}\checkmark}
+
+      		\itemexpr{por otro lado,}{[0..i) == [0..0) == []}
+      		\itemexpr{y esto implica}{ingresos(this)_{[0..i)} == ingresos(this)_{[]} == []}
+
+	      	\itemexpr{Por definici\'on de las listas por comprensi\'on, si el selector se toma de una lista vac\'ia, la lista resultante tambi\'en es vac\'ia. En particular:}{[ prm(prm(in)) | in  \selec ingresos(this)_{[0..i)}, co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+	          \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)] \\
+	         == [ prm(prm(in)) | in  \selec [], co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+	          \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)] \\
+	         == []}
+	        \itemexpr{luego, como $result == []$}{\textcolor{NavyBlue}{result == [ prm(prm(in)) | in  \selec ingresos(this)_{[0..i)}, co  \selec  salidas(this), prm(prm(in)) == prm(co)} \\
+	        \textcolor{NavyBlue}{ \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]}\checkmark}
+  			\item por último, la conjunción de las dos proposiciones marcadas es I
+		\end{itemize}
+	\item $I \land \lnot B \rightarrow Qc$
+  		\begin{itemize}
+		  \itemexpr{por hip\'otesis, vale}{
+		    i \geq |ingresos(this)| \land \\
+		    0 \leq i \leq |ingresos(this)| \land  \\
+		    result == [ prm(prm(in)) | in  \selec  ingresos(this)_{[0..i)}, co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+		        \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+		  }
+		  \itemexpr{como \ensuremath{i \leq |ingresos(this)| \land  i \geq |ingresos(this)|}, por propiedades de enteros}{
+		    i == |ingresos(this)|
+		  }
+		  \itemexpr{luego, reemplazando i}{
+		    ingresos(this)_{[0..i)} == ingresos(this)_{[0..|ingresos(this)|)} == ingresos(this)
+		  }
+		  \itemexpr{utilizando este reemplazo, se obtiene Qc}{\textcolor{NavyBlue}{
+		    result == [ prm(prm(in)) | in  \selec  ingresos(this), co  \selec  salidas(this), prm(prm(in)) == prm(co)} \\ \textcolor{NavyBlue}{
+		        \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+		  } \checkmark}
+  		\end{itemize}
+  	\item Función variante decrece
+  		\begin{itemize}
+  			\itemexpr{expresamos Fv al principio y final del ciclo,}{
+   			 	Fv@e2 == this\rightarrow\_ingresos.longitud() - i@e2 \\
+    			Fv@e4 == this\rightarrow\_ingresos.longitud() - i@e4
+  			}
+  			\itemexpr{en la transici\'on de estados, se observa que:}{
+    			i@e4 == i@e3 + 1 == i@e2 + 1
+  			}
+  			\itemexpr{luego, reemplazando y por propiedad de enteros}{\textcolor{NavyBlue}{
+    			Fv@e4 == this\rightarrow\_ingresos.longitud() - i@e2 - 1 < this\rightarrow\_ingresos.longitud() - i@e2 == Fv@e2
+    		} \checkmark}
+  		\end{itemize}
+  	\item $I \land Fv \leq 0 \rightarrow \lnot B$
+  		\begin{itemize}
+			  \itemexpr{por hip\'otesis,}{
+			    this\rightarrow\_ingresos.longitud() - i \leq 0  \\
+			    this\rightarrow\_ingresos.longitud() \leq i
+			  }
+			  \itemexpr{o equivalentemente (por la observación número 2.),}{
+			    \textcolor{NavyBlue}{\lnot (i < |ingresos(this)|)} \checkmark
+			  }
+  		\end{itemize}
+  	\item El cuerpo del ciclo preserva el invariante
+  		\begin{itemize}
+		  \itemexpr{en e2, vale $ ^1 $}{
+		    i < |ingresos(this)| \land  \\
+		    result == [ prm(prm(in)) | in  \selec  ingresos(this)_{[0..i)}, co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+		        \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+		  }
+		  \itemexpr{en e3, vale $ ^1 $}{
+		    result == result@e2 \masmas [ prm(prm(in)) | in  \selec  [ingresos(this)_{i@e2}], co  \selec  salidas(this), \\ prm(prm(in)) == prm(co) \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+		  }
+		  \itemexpr{reemplazando result@e2 y i@e2,}{
+		    result == [ prm(prm(in)) | in  \selec  ingresos(this)_{[0..i)}, co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+		        \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)] \masmas \\
+		                .[ prm(prm(in)) | in  \selec  [ingresos(this)_{i}], co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+		                    \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+		  }
+		  \itemexpr{se puede observar que las listas concatenadas en el paso anterior difieren \'unicamente en el selector \emph{in}:}{
+		  		\emph{\ensuremath{in  \selec  ingresos(this)_{[0..i)}} ... \ensuremath{in  \selec  [ingresos(this)_{i}]}}
+		  }
+		  \itemexpr{esto es equivalente a tomar una sola lista por comprensi\'on, concatenando las listas del selector \emph{in};
+		  es decir:}{
+			  result == [ prm(prm(in)) | in  \selec  ingresos(this)_{[0..i]}, co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+			        \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+		  }
+		  \itemexpr{en e4, vale $ ^1 $}{
+		    i == i@e3 + 1 \land \\
+		    result == result@e3
+		  }
+		  \itemexpr{reemplazando, obtengo}{
+		    \textcolor{NavyBlue}{
+			    result == [ prm(prm(in)) | in  \selec  ingresos(this)_{[0..i)}, co  \selec  salidas(this), prm(prm(in)) == prm(co)} \\ \textcolor{NavyBlue}{
+			        \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+			        } \checkmark
+		  }
+		  \itemexpr{finalmente, se observa:}{
+		    i == i@e3 + 1 == i@e2 + 1
+		  }
+		  \itemexpr{como \ensuremath{0 \leq i@e2 < |ingresos(this)|}, sumando 1 en cada miembro}{
+		    1 \leq i \leq |ingresos(this)|
+		  }
+		  \itemexpr{y por \'ultimo,}{
+		    \textcolor{NavyBlue}{0 \leq i \leq |ingresos(this)|} \checkmark
+		  }
+  		\end{itemize}
+		  \noindent $ ^1 $ A partir de las transformaciones de estados, expresadas previamente.\\
+\end{itemize}
+
+\subsubsection{Demostración del problema}
+
+	\begin{itemize}
+	  \itemexpr{como en e1 vale}{
+	    result == [] \land i == 0
+	  }
+	  \itemexpr{se satisface la precondici\'on del ciclo Pc. Luego, en e5 vale Qc;}{
+	    result == [ prm(prm(in)) | in  \selec  ingresos(this), co  \selec  salidas(this), prm(prm(in)) == prm(co) \\
+	          \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)]
+	  }
+	  \itemexpr{como en e6 vale:}{
+	    result == sacarRepetidos(result@e5)
+	  }
+	  \itemexpr{reemplazando result@e5,}{
+	    result == sacarRepetidos([ prm(prm(in)) | in  \selec  ingresos(this), co  \selec  salidas(this), prm(prm(in)) == prm(co)
+	          \land noHaySalidaEnElMedio(prm(in),co,this) \land hayReserva(in,co,this)])
+	  }
+	  \itemexpr{finalmente, notando la observaci\'on (3.) al comienzo del problema:}{
+	    \textcolor{NavyBlue}{
+		    result == [ prm(prm(in)) | in  \selec  ingresos(this)_{[0..i)}, co  \selec  salidasDe(this,prm(prm(in))),} \\
+		    \textcolor{NavyBlue}{
+			    noHaySalidaEnElMedio(prm(in),co,this),
+			      hayReserva(in,co,this) ]
+	    } \checkmark
+	  }
+	  \item que es lo que buscaba demostrar.
+	\end{itemize}

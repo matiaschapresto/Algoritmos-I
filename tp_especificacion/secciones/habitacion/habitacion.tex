@@ -1,0 +1,8 @@
+\begin{tipo}{Habitacion}
+	\observador{numero}{h: Habitacion}{\ent}
+	\observador{tipo}{h: Habitacion}{TipoHabitacion}
+	\observador{accesorios}{h: Habitacion}{[Accesorio]}
+	\medskip
+	\invariante[sinAccesoriosRepetidos]{sinRepetidos(accesorios(h))}
+	\invariante[accesoriosOrdenada]{ordenada(accesorios(h))}
+\end{tipo}

@@ -1,0 +1,34 @@
+\begin{problema}{huespedesConPalabra}{h: Hotel}{[DNI]}
+\medskip
+
+\asegura{
+	mismos(result, 
+		sacarRepetidos(\\
+		  \comp{
+			  documento(r)
+		  }{
+			  r \selec reservas(h), confirmada(r), respetoSusReservas(h, documento(r))
+		  }\\
+		)
+	)
+}
+
+% \coloredAux{reservaDeBuenaFe}{ci: CheckIn, co: CheckOut, res: Reserva}{\bool}{
+% 	fechaCheckIn(ci) == FechaDesde(res) \land
+% 	fechaCheckOut(co) == FechaHasta(res)
+% }
+\medskip
+
+\coloredAux{respetoSusReservas}{h: Hotel, d: DNI}{\bool}{
+    (\forall r \selec reservasDe(h,d),confirmada(r))\\
+    reservaFueRespetada(h, r)
+}
+
+\coloredAux{reservaFueRespetada}{h: Hotel, r: Reserva}{\bool}{
+	\\
+	(\exists ci \selec ingresosDe(h, documento(r)), co \selec salidasDe(h, documento(r))) \\
+	fechaCheckIn(ci) == fechaDesde(r) \land fechaCheckOut(co) == fechaHasta(r) \land \\
+	esCheckInAsociado(h, co,ci)
+}
+
+\end{problema}

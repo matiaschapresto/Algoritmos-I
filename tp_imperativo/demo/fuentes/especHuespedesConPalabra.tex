@@ -1,0 +1,24 @@
+\begin{problema}{huespedesConPalabra}{this: Hotel}{[DNI]}    
+    \asegura {mismos(result, sacarRepetidos(buscarHuespedesDePalabra(this)))}
+    \vspace{3mm}
+
+	\aux{buscarHuespedesDePalabra}{this: Hotel}{[DNI]}
+	{
+		\comp{prm(prm(i))}{i \selec ingresos(this), \\
+			o \selec salidasDe(this, prm(prm(i))), noHaySalidaEnElMedio(prm(i), o, this), hayReserva(in,co,this)
+			}
+	}
+	\aux{hayReserva}{i: (CheckIn, Habitacion), o: CheckOut, h: Hotel}{\bool}
+	{
+		\\
+		existeReserva(h, dniCheckIn(prm(i)), fechaCheckIn(prm(i)), fechaCheckOut(o), tipo(sgd(i)), true)
+	}
+	\aux{existeReserva}{h: Hotel, d: DNI, fd: Fecha, fh: Fecha, t: TipoHabitacion, c: Bool}{\bool}
+	{
+		(\exists r \selec reservas(h)) \\
+		documento(r) == d \land fechaDesde(r) == fd \land tipo(r) == t \land
+		fechaHasta(r) == fh \land confirmada(r) == c
+	}
+\end{problema}
+
+\noindent Nota: \emph{mismos}, \emph{sacarRepetidos}, \emph{noHaySalidaEnElMedio} y \emph{salidasDe} se tomaron sin modificacíón de la sección de auxiliares de la especifiación del proyecto.\\

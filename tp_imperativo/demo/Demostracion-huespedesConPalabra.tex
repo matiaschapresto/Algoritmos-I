@@ -1,0 +1,162 @@
+\documentclass[a4paper]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage{bbm}
+\usepackage{framed}
+\usepackage{graphicx} %Para incluir el logo de la UBA
+\usepackage{caratula} %Para armar el cuadro de integrantes
+\usepackage{listings}
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.97,0.97,0.97}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\input{macrosAlgo1}
+
+\newcommand{\comen}[2]{%
+\begin{framed}	
+\noindent \textsf{#1:} #2
+\end{framed}
+}
+
+\begin{document}
+
+%\materia{Algoritmos y Estructuras de Datos I}
+%\cuatrimestre{2}
+%\anio{2012}
+
+%\fecha{9 de Noviembre de 2012}
+
+%\nombre{\LARGE TPI De Hoteles y Pasajeros}
+
+%\titulotp
+
+%---------------------
+
+\integrante{Almansi, Emilio Guido}{674/12}{ealmansi@gmail.com}
+\integrante{Vilerino, Silvio Fernando}{106/12}{svilerino@gmail.com}
+\integrante{Chapresto, Matias Nahuel}{201/12}{matiaschapresto@gmail.com}
+\integrante{Erdei, Alan}{170/12}{alane1993@hotmail.com}
+
+\def\Materia{Algoritmos y Estructuras de Datos I}
+\cuatrimestre{2}
+\anio{2012}
+\def\Titulo{\LARGE RTPI De Hoteles y Pasajeros: Demo huespedesConPalabra}
+\def\Grupo{Los Simuladores}
+\def\Fecha{3 de Diciembre de 2012}
+
+%----- CARATULA -----%
+
+\thispagestyle{empty}
+
+\begin{center}
+	\includegraphics[scale = 0.25]{imagenes/logo_uba.jpg}
+\end{center}
+
+\vspace{5mm}
+
+\begin{center}
+	{\textbf{\large UNIVERSIDAD DE BUENOS AIRES}}\\[1.5em]
+	{\textbf{\large Departamento de Computaci\'{o}n}}\\[1.5em]
+    {\textbf{\large Facultad de Ciencias Exactas y Naturales}}\\
+    \vspace{20mm}
+    {\LARGE\textbf{\Materia}}\\[1em]    
+    \vspace{5mm}
+    {\LARGE\textbf{\cuatrimestreLindo de \elanio}}\\
+    \vspace{15mm}
+    {\Large \textbf{\Titulo}}\\[1em]
+    \vspace{15mm}
+    {\textbf{\Large \Fecha}}\\
+    \vspace{15mm}
+    {\textbf{\Large Grupo \Grupo}}\\
+    \vspace{10mm}
+    \textbf{\tablaints}
+\end{center}
+
+%-----------------------
+
+\newpage
+
+\tableofcontents
+\medskip
+\newpage
+\section{Demostraci\'on huespedesConPalabra}
+
+\subsection{Especificaci\'on huespedesConPalabra}
+
+\input{fuentes/especHuespedesConPalabra.tex}
+
+\subsection{Implementaci\'on huespedesConPalabra}
+
+\lstinputlisting[language=C++,tabsize=4, numbers=left, numberstyle=\tiny\color{black},mathescape=true, backgroundcolor=\color{gray}, rulecolor=\color{black}, keywordstyle=\color{blue}, commentstyle=\color{dkgreen},stringstyle=\color{mauve}, numbersep=5pt, basicstyle=\scriptsize]{fuentes/huespedesConPalabra.cpp}
+
+\subsection{Demostraci\'on huespedesConPalabra}
+
+\input{fuentes/demoHuespedesConPalabra.tex}
+
+\newpage
+
+\section{Demostraci\'on sacarRepetidos}
+
+\subsection{Especificaci\'on funcion auxiliar sacarRepetidos}
+
+\input{fuentes/especSacarRepetidos.tex}
+
+\subsection{Implementaci\'on funcion auxiliar sacarRepetidos}
+
+\lstinputlisting[language=C++,tabsize=4, numbers=left, numberstyle=\tiny\color{black},mathescape=true, backgroundcolor=\color{gray}, rulecolor=\color{black}, keywordstyle=\color{blue}, commentstyle=\color{dkgreen},stringstyle=\color{mauve}, numbersep=5pt, basicstyle=\scriptsize]{fuentes/sacarRepetidos.cpp}
+
+\subsection{Demostraci\'on funcion auxiliar sacarRepetidos}
+
+\input{fuentes/demoSacarRepetidos.tex}
+
+\newpage
+
+\section{Demostraci\'on hayReserva}
+
+\subsection{Especificaci\'on funcion auxiliar HayReserva}
+
+\input{fuentes/especHayReserva.tex}
+
+\subsection{Implementaci\'on funcion auxiliar HayReserva}
+
+\lstinputlisting[language=C++,tabsize=4, numbers=left, numberstyle=\tiny\color{black},mathescape=true, backgroundcolor=\color{gray}, rulecolor=\color{black}, keywordstyle=\color{blue}, commentstyle=\color{dkgreen},stringstyle=\color{mauve}, numbersep=5pt, basicstyle=\scriptsize]{fuentes/hayReserva.cpp}
+
+\subsection{Demostraci\'on funcion auxiliar HayReserva}
+
+\input{fuentes/demoHayReserva.tex}
+
+\newpage
+
+\section{Demostraci\'on noHaySalidaEnMedio}
+
+\subsection{Especificaci\'on funcion auxiliar noHaySalidaEnMedio}
+
+\input{fuentes/especNoHaySalidaEnMedio.tex}
+
+\subsection{Implementaci\'on funcion auxiliar noHaySalidaEnMedio}
+
+\lstinputlisting[language=C++,tabsize=4, numbers=left, numberstyle=\tiny\color{black},mathescape=true, backgroundcolor=\color{gray}, rulecolor=\color{black}, keywordstyle=\color{blue}, commentstyle=\color{dkgreen},stringstyle=\color{mauve}, numbersep=5pt, basicstyle=\scriptsize]{fuentes/noHaySalidaEnMedio.cpp}
+
+\subsection{Demostraci\'on funcion auxiliar noHaySalidaEnMedio}
+
+\input{fuentes/demoNoHaySalidaEnMedio.tex}
+
+\newpage
+
+\section{Demostraci\'on procesarIesimoIngreso}
+
+\subsection{Especificaci\'on funcion auxiliar procesarIesimoIngreso}
+
+\input{fuentes/especProcesarIesimoIngreso.tex}
+
+\subsection{Implementaci\'on funcion auxiliar procesarIesimoIngreso}
+
+\lstinputlisting[language=C++,tabsize=4, numbers=left, numberstyle=\tiny\color{black},mathescape=true, backgroundcolor=\color{gray}, rulecolor=\color{black}, keywordstyle=\color{blue}, commentstyle=\color{dkgreen},stringstyle=\color{mauve}, numbersep=5pt, basicstyle=\scriptsize]{fuentes/procesarIesimoIngreso.cpp}
+
+\subsection{Demostraci\'on funcion auxiliar procesarIesimoIngreso}
+
+\input{fuentes/demoProcesarIesimoIngreso.tex}
+
+\end{document}

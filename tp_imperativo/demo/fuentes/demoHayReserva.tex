@@ -1,0 +1,71 @@
+\small Las implicaciones mas importantes estan en \textcolor{NavyBlue}{AZUL}\\
+\small Referirse a los estados mas arriba cuando sea necesario\\
+\vspace{2mm}
+
+\subsection{Pc $ \Rightarrow $ I}
+\begin{itemize}
+	\item $ ^1 $ \textcolor{NavyBlue}{$(longuitud == |reservas(this)|)$} \checkmark
+	\item $ ^2 $ longitud $ >= $ 0  $ \land $ i == 0 $ \Rightarrow $ i $ \leq $ longitud
+	\item $ ^2 $ i == 0  $ \Rightarrow $ 0 $ \leq $ i
+	\item \textcolor{NavyBlue}{0 $ \leq $ i $ \leq $ longitud} \checkmark
+	\item hayUnaReserva = ($ \exists $ j $ \selec $ [0..i)) esReservaValida(snd(ingreso), $ reservas(this)_j $ , fst(ingreso), checkout)
+	\item $ ^3 $ \textcolor{NavyBlue}{hayUnaReserva == false == ($ \exists $ j $ \selec $ [0..0)) esReservaValida(snd(ingreso), $ reservas(this)_j $ , fst(ingreso), checkout)} \checkmark
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Por poscondición del problema \emph{longitud} definido para el tipo Lista.\\
+$ ^2 $ Porque longitud $\geq$ 0 (por ser $longitud == |reservas(this)|$) y por propiedades de los números enteros\\
+$ ^3 $ i==0, luego existencial de vacio es false\\
+
+\subsection{(I $ \land $ $ \lnot $B) $ \Rightarrow $ Qc}
+\begin{itemize}
+	\item $ ^1 $ (I $ \land $ $ \lnot $B) $ \Rightarrow $ i == longitud
+	\item $ ^2 $ \textcolor{NavyBlue}{ hayUnaReserva == ( $ \exists $ j $ \selec $ [0..longitud)) esReservaValida(snd(ingreso), $ reservas(this)_j $ , fst(ingreso), checkout)} \checkmark
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Se infiere de I\\
+
+\subsection{Funcion variante decrece}
+\begin{itemize}
+	\item Fv: longitud - i
+	\item $ i@e3 == i@e2 + 1 == i@e1 + 1 $
+	\item $ ^1 $ $ i@e3 > i@e1 $
+	\item $ ^1 $ $ - i@e3 < - i@e1 $
+	\item $ ^2 $ \textcolor{NavyBlue}{ $ longitud - i@e3 < longitud - i@e1 $} \checkmark	
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Sumando longitud a ambos lados\\
+
+\subsection{I $ \land $ $ Fv \leq Cota $ $ \Rightarrow $ $ \lnot $ B}
+\begin{itemize}
+	\item Fv: longitud - i
+	\item Cota: 0
+	\item Fv $ \leq $ Cota $ \Rightarrow $ $ longitud - i \leq 0 $ 
+	\item longitud $ \leq $ i
+	\item B: i $ < $ longitud $ \Rightarrow $ $ \lnot $ B: longitud $ \leq $ i
+	\item \textcolor{NavyBlue}{ $ \lnot $ B $ \Leftrightarrow $ Fv  $ \leq $ Cota} \checkmark	
+\end{itemize}
+\vspace{3mm}
+
+\subsection{El cuerpo del ciclo preserva el invariante}
+\begin{itemize}
+	\item $ ^1 $ $ ^2 $ 0 $ \leq $ i@e1 $ \Rightarrow $ 0 $ \leq $ i@e1 + 1
+	\item $ ^3 $ 0 $ \leq $ i@e3
+	\item $ ^1 $ $^2 $ i@e1 $ < $ longitud $ \Rightarrow $ i@e1 + 1 $ < $ longitud + 1
+	\item $ ^3 $ i@e3 $ \leq $ longitud	
+	\item \textcolor{NavyBlue}{0 $ \leq $ i@e3 $ \leq $ longitud} \checkmark
+	\item hayUnaReserva == hayUnaReserva@e2 == hayUnaReserva@e1 $ \lor $ esReservaValida(snd(ingreso), $ reservas(this)_i $ , fst(ingreso), checkout)
+	\item hayUnaReserva == ( $ \exists $ j $ \selec $ [0..i@e1)) esReservaValida(snd(ingreso), $ reservas(this)_j $ , fst(ingreso), checkout) $ \lor $ esReservaValida(snd(ingreso), $ reservas(this)_i $ , fst(ingreso), checkout)
+	\item $ ^4 $ hayUnaReserva == ( $ \exists $ j $ \selec $ [0..i@e1 + 1)) esReservaValida(snd(ingreso), $ reservas(this)_j $ , fst(ingreso), checkout)
+	\item $ ^3 $ \textcolor{NavyBlue}{hayUnaReserva == ( $ \exists $ j $ \selec $ [0..i@e3)) esReservaValida(snd(ingreso), $ reservas(this)_j $ , fst(ingreso), checkout)} \checkmark
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Vale I $ \land $ B en e1\\
+$ ^3 $ i@e3 == i@e1 + 1\\
+$ ^4 $ Por propiedad de existencial e intervalos podemos incluirlo\\

@@ -1,0 +1,216 @@
+\aux{dniCheckIn}{c: CheckIn}{DNI}{prm(c)} 
+
+\vspace{0.2cm}
+
+\aux{dniCheckOut}{c: CheckOut}{DNI}{prm(c)}
+
+\vspace{0.2cm}
+
+\aux{fechaCheckIn}{c: CheckIn}{Fecha}{snd(c)}
+
+\vspace{0.2cm}
+
+\aux{fechaCheckOut}{c: CheckOut}{Fecha}{snd(c)}
+
+\vspace{0.2cm}
+
+\aux{ingresosDe}{h: Hotel, d: DNI}{[CheckIn]}{[ prm(x) | x \selec ingresos(h), dniCheckIn(prm(x))==d]}
+
+\vspace{0.2cm}
+
+\aux{salidasDe}{h: Hotel, d: DNI}{[CheckOut]}{[ x | x \selec salidas(h), dniCheckOut(x)==d]}
+
+\vspace{0.2cm}
+
+%\aux{existeUnIngresoSinSalida}{h: Hotel, o1: CheckOut}{\bool}{\\ 
+%(\exists i \selec ingresosDe(h, dniCheckOut(o1)), fechaCheckIn(i) < fechaCheckOut(o1))\\ \ 
+%\neg (\exists o2 \selec salidasDe(h, dniCheckOut(o1)), fechaCheckIn(i) < fechaCheckOut(o2) < %fechaCheckOut(o1)}
+%
+%\vspace{0.2cm}
+
+%\aux{existeUnIngresoElMismoDia}{h: Hotel, d: DNI, f: Fecha}{\bool}{\\
+%(\exists i \selec ingresosDe(h, d)) fechaCheckIn(i) ==  f }
+%
+%\vspace{0.2cm}
+
+\aux{existeUnaHabitacionDelTipo}{h: Hotel, t: TipoHabitacion}{\bool}{(\exists x \selec habitaciones(h)) tipo(x)==t}
+
+\vspace{0.2cm}
+
+\aux{capacidad}{h: Hotel}{\ent}{\sum \comp{cantidadHuespedes(tipo(h))}{h \selec habitaciones(h)}}
+
+\vspace{0.2cm}
+
+\aux{cantidadHuespedes}{t: TipoHabitacion}{\ent}{\\ \IfThenElse{t==Simple}{1}{(\IfThenElse{t==Doble}{2}{(\IfThenElse{t==Triple}{3}{4})})}}
+
+\vspace{0.2cm}
+
+%\aux{compartenCadena}{hss: [[Hotel]]}{\bool}{(\forall hs \selec hss) sonDeLaMismaCadena(hs)}
+%
+%\vspace{0.2cm}
+
+%\aux{sonDeLaMismaCadena}{hs: [Hotel]}{\bool}{(\forall h1,h2 \selec hs) cadena(h1)==cadena(h2)}
+%
+%\vspace{0.2cm}
+
+%\aux{todosLosHoteles}{m: MinisterioDeTurismo}{[Hotel]}{\comp{h}{p \selec secretarias(m), h \selec %registro(m,p)}}
+%
+%\vspace{0.2cm}
+
+%\aux{todosLosNombres}{hs: [Hotel]}{String]}{\comp{nombre(h)}{h \selec hs}}
+%
+%\vspace{0.2cm}
+
+\aux{aplanar}{xss: [[T]]}{[T]}{\comp{x}{xs \selec xss, x \selec xs}}
+
+\vspace{0.2cm}
+
+\aux{ordenada}{l:[T]}{\bool}{(\forall i \selec [0.. \longitud{l}-1)) l_i \leq l_{i+1}}
+
+\vspace{0.2cm}
+
+\aux{sinRepetidos}{l: [T]}{\bool}{(\forall i, j \selec [0.. \longitud{l}), i \neq j) l_i \neq l_j}
+
+\vspace{0.2cm}
+
+\aux{sacarRepetidos}{l: [T]}{[T]}{\comp{l_i}{i \selec [0.. \longitud{l}), l_i \notin l_{[i+1..|l|-1)}}}
+%aux sacarRepetidos (l: [T]) :  = [ li | i ← [0.. |l| , li ∈ l[ i + 1..longitud(l) − 1) ] ;
+
+\vspace{0.2cm}
+
+\aux{seQuedoAlMenosUnDia}{ci: CheckIn, co: CheckOut}{\bool}{fechaCheckIn(ci) \leq fechaCheckOut(co) + 1}
+
+\vspace{0.2cm}
+
+\aux{listaSinElemento}{lista: [T], elem: T}{[T]}{
+	\comp{item}{item \selec lista, \lnot item == elem}
+}
+
+\vspace{0.2cm}
+
+\aux{reservasDe}{h: Hotel, dniHuesped: DNI}{[Reserva]}{
+	\comp{res}{res \selec reservas(h), documento(res) == dniHuesped}
+}
+
+\vspace{0.2cm}
+
+\aux{existeUnicoCheckInAsociado}{h: Hotel, co: CheckOut}{\bool}
+{
+  |obtenerCheckInsAsociados(h,co)| == 1
+}
+
+\vspace{0.2cm}
+
+\aux{obtenerCheckInsAsociados}{h: Hotel, co: CheckOut}{[CheckIn]}
+{
+  \comp{prm(i)}{i \selec ingresos(h),\\
+  esCheckInAsociado(h, co, prm(i))}
+}
+
+\vspace{0.2cm}
+
+\aux{esCheckInAsociado}{h: Hotel, co: CheckOut, ci: CheckIn}{\bool}
+{
+    ((dniCheckIn(ci) == dniCheckOut(co)) \land
+    \\(fechaCheckIn(ci) < fechaCheckOut(co)) \land noExisteCheckOutEnMedio(h, ci, co))
+}
+
+\vspace{0.2cm}
+
+\aux{noExisteCheckOutEnMedio}{h:Hotel, ci: CheckOut, co: CheckOut}{\bool}
+{
+	\lnot(\exists oco \selec salidasDe(h, dniCheckIn(ci)))\\
+	((fechaCheckIn(ci) < fechaCheckOut(oco)) \land (fechaCheckOut(oco) < fechaCheckOut(co)))
+}
+
+\vspace{0.2cm}
+
+\aux{mismosHoteles}{a: [Hotel], b: [Hotel]}{\bool}
+{
+	(|a|==|b| \land (\forall h \selec a)contarHotel(h,a)==contarHotel(h,b))
+}
+
+\vspace{0.2cm}
+
+\aux{contarHotel}{hs: [Hotel], h: Hotel}{\ent}
+{
+	|\comp{oh}{oh \selec hs, hotelEquivalente(h, oh)}|
+}
+
+\vspace{0.2cm}
+
+\aux{hotelPertenece}{h: Hotel,hs: [Hotel]}{\bool}
+{
+	(\exists oh \selec hs)hotelEquivalente(h,oh)
+}
+
+\vspace{0.2cm}
+
+\aux{hotelEquivalente}{h1: Hotel, h2: Hotel}{\bool}
+{
+	\\ (nombre(h1) == nombre(h2)) \land \\
+	(cadena(h1) == cadena(h2)) \land \\
+	(mismos(ingresos(h1), ingresos(h2))) \land \\
+	(mismos(huespedes(h1), huespedes(h2)) \land \\
+	(mismos(habitaciones(h1), habitaciones(h2))) \land \\
+	(mismos(salidas(h1), salidas(h2))) \land \\
+	(mismos(reservas(h1), reservas(h2))) \land \\
+	(mismos(tarifasHabitacionXDia(h1), tarifasHabitacionXDia(h2))) \land \\
+	(mismos(precioAccesorio(h1), precioAccesorio(h2)))
+}
+
+\vspace{0.2cm}
+
+\aux{provinciasDeCadena}{m: MinisterioDeTurisimo, c: [Hotel]}{[Provincia]}
+{
+	\\ sacarRepetidos(\comp{provinciaDeHotel(m, h)}{h \selec c})
+}
+
+\vspace{0.2cm}
+	
+\aux{provinciaDeHotel}{m: Ministerio, h: Hotel}{Provincia}
+{
+	cab(\comp{p}{p \selec secretarias(m),\\
+	oh \selec registro(m, p), hotelEquivalente(oh, h)})
+}
+
+\vspace{0.2cm}
+
+\aux{cadenaRegistrada}{m: MinisterioDeTurismo, c: Cadena}{\bool}
+{
+	\\ (\exists ch \selec cadenasDeHoteles(m))	cadena(cab(ch)) == c
+}
+
+\vspace{0.2cm}
+
+\aux{noCompartenProvincia}{m: Ministerio, c1: Cadena, c2: Cadena}{\bool}
+{
+	\\ sinRepetidos( provinciasDeCadena(m,obtenerListaDeLaCadena(m,c1))\\
+	++ provinciasDeCadena(m,obtenerListaDeLaCadena(m,c2)) )
+}
+
+\vspace{0.2cm}
+
+%no se rompe el invariante sinNombresRepetidosEnCadenas al unir c1 y c2
+%Este invariante garantiza que los hoteles de cada elemento del observador
+%cadenasDeHoteles tienen distintos nombres.
+\aux{sonCompatibles}{m: MinisterioDeTurismo, c1: Cadena, c2: Cadena)}{\bool}
+{
+	\\ sinRepetidos( \comp{nombre(h)}{h \selec unionHotelesDeCadenas(c1, c2)} )
+}
+
+\vspace{0.2cm}
+
+\aux{unionHotelesDeCadenas}{c1: Cadena, c2: Cadena}{[Hotel]}
+{
+	\\
+	\comp{h}{ch \selec cadenasDeHoteles(m), h \selec ch, cadena(h)==c1 \lor cadena(h)==c2}
+}
+
+\vspace{0.2cm}
+
+\aux{obtenerListaDeLaCadena}{m: Ministerio, c: Cadena}{[Hotel]}
+{
+  cab(\comp{lh}{lh \selec cadenasDeHoteles(m),\\
+  cadena(cab(lh)) == c})
+}

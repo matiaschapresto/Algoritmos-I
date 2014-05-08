@@ -1,0 +1,78 @@
+\begin{problema}{fusionAutorizada}{m: MinisterioDeTurismo, c1: Cadena, c2: Cadena}{}
+  \medskip
+  
+  %ver si para algun elemento de cadenasDeHoteles, cadena(cab(c)) == c1; idem c2
+  \requiere{cadenaRegistrada(m,c1) \land cadenaRegistrada(m,c2)}
+  %no se rompe el invariante sinNombresRepetidosEnCadenas al unir c1 y c2
+  \requiere{sonCompatibles(m,c1,c2)}
+  %un sinRepetidos( sacarRepetidos(provincias(c1)) ++ sacarRepetidos(provincias(c2)) )
+  \requiere{noCompartenProvincias(m,c1,c2)}
+  \medskip
+
+  \modifica{m}
+  \asegura[noCambianLasSecretarias]{mismos(secretarias(m),secretarias(pre(m)))}
+  \asegura[sinCambiosIndeseados]{(\forall p \selec secretarias(m))registroModificadoCorrectamente(m,p,c1,c2)}
+  \medskip
+  
+  \asegura[dosCadenasSeConviertenEnUnaSola]{|cadenasDeHoteles(m)| == |cadenasDeHoteles(pre(m))|-1}
+  \asegura{estanLasDemasCadenas(m,c1,c2)}
+  \asegura{estaLaCadenaFusionada(m,c1,c2)}
+%   para cada registro, \\
+% 		1) se mantiene la longitud,\\
+% 		2) recorro el registro viejo; para cada hotel:
+% 						    si no era de c2 => existe uno equivalente en el nuevo registro
+% 						    si era de c2 => existe uno casi equivalente, salvo por el observador cadena
+%   
+  \medskip
+
+  \coloredAux{registroModificadoCorrectamente}{m: Ministerio, p: Provincia, c1,c2: Cadena}{\bool}
+  {
+      \\|registro(m,p)|==|registro(pre(m),p)| \land hotelesDeseados(m,p,c1,c2)  )
+  }
+  \coloredAux{hotelesDeseados}{m: Ministerio, p: Provincia, c1,c2: Cadena}{\bool}
+  {
+      (\forall h \selec registro(pre(m),p))\\
+      \IfThenElse{cadena(h) == c2}{hotelApareceConCadenaCambiada(h,registro(m,p),c1)}{\\ hotelPertenece(h,registro(m,p))}
+  }
+  \coloredAux{estanLasDemasCadenas}{m: Ministerio, c1,c2: Cadena}{\bool}
+  {
+      \\(\forall lh \selec cadenasDeHoteles(pre(m)), \lnot cadena(cab(lh))==c1\\
+      \land \lnot cadena(cab(lh))==c2)cadenaPertenece(lh, cadenasDeHoteles(m))
+  }
+  \coloredAux{estaLaCadenaFusionada}{m: Ministerio, c1,c2: Cadena}{\bool}
+  {
+      \\(\exists lh \selec cadenasDeHoteles(m))\\
+      (|lh|==|obtenerListaDeLaCadena(pre(m),c1)|+|obtenerListaDeLaCadena(pre(m),c2)|)\\
+      \land contieneC1(m,c1,lh) \land contieneC2Modificada(m,c1,c2,lh)
+  }
+  \coloredAux{contieneC1}{m: Ministerio, c1: Cadena, lh: [Hotel]}{\bool}
+  {
+      \\(\forall h \selec obtenerListaDeLaCadena(pre(m),c1))\\
+      hotelPertenece(h,lh)
+  }
+  \coloredAux{contieneC2Modificada}{m: Ministerio, c1,c2: Cadena, lh: [Hotel]}{\bool}
+  {
+      \\(\forall h \selec obtenerListaDeLaCadena(pre(m),c2))\\
+      hotelApareceConCadenaCambiada(h,lh,c1)
+  }
+  \coloredAux{hotelApareceConCadenaCambiada}{h: Hotel, hs: [Hotel], c: Cadena}{\bool}
+  {
+    \\(\exists oh \selec hs)hotelConCadenaCambiada(h,oh,c)
+  }
+  \coloredAux{hotelConCadenaCambiada}{h1: Hotel, h2: Hotel, c: nuevaCadena}{\bool}
+  {
+	  \\ (nombre(h1) == nombre(h2)) \land \\
+	  (cadena(h2) == nuevaCadena)) \land \\
+	  (mismos(ingresos(h1), ingresos(h2))) \land \\
+	  (mismos(huespedes(h1), huespedes(h2)) \land \\
+	  (mismos(habitaciones(h1), habitaciones(h2))) \land \\
+	  (mismos(salidas(h1), salidas(h2))) \land \\
+	  (mismos(reservas(h1), reservas(h2))) \land \\
+	  (mismos(tarifasHabitacionXDia(h1), tarifasHabitacionXDia(h2))) \land \\
+	  (mismos(precioAccesorio(h1), precioAccesorio(h2)))
+  }
+  \coloredAux{cadenaPertenece}{lh: [Hotel], llh: [[Hotel]]}{\bool}
+  {
+      (\exists olh \selec llh)mismosHoteles(lh,olh)
+  }
+\end{problema}

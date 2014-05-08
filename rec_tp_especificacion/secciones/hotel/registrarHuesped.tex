@@ -1,0 +1,66 @@
+\begin{problema}{registrarHuesped}{h: Hotel, d: DNI, f:Fecha, a: Habitacion}{} 
+  
+  %garantiza inv habitacionesValidas, inv reservasValidas
+  \requiere{a \in habitaciones(h)}
+  \requiere{\lnot habitacionEstaOcupada(h, d, f, a)}
+  %garantiza inv siEstanNoSeFueron, inv noVuelveElMismoDia
+  \requiere[sinCheckOutPosterior]{\lnot(\exists co \selec salidasDe(h, d))f \leq fechaCheckOut(co)}
+  %garantiza inv siSeVaEntro
+  %garantiza inv estanAlMenosUnDia
+  %garantiza inv noEntranDosVeces
+  \requiere[siVieneNoEstaba]{d \notin huespedes(h)}
+
+  \requiere[existeReserva]{(\exists r \selec reservas(h)) esReservaSinConfirmarAsociadaAlIngreso(r, d, f, a)}
+
+  \medskip
+  
+  \modifica{h}
+  \asegura[mismoNombre]{nombre(h) == nombre(pre(h))}
+  \asegura[mismaCadena]{cadena(h) == cadena(pre(h))}
+  \asegura[mismasHabitaciones]{mismos(habitaciones(h),habitaciones(pre(h)))}
+  \asegura[mismasSalidas]{mismos(salidas(h), salidas(pre(h)))}
+  \asegura[mismasTarifas]{mismos(tarifaHabitacionXDia(h), tarifaHabitacionXDia(pre(h)))}
+  \asegura[mismosAccesorios]{mismos(precioAccesorio(h), precioAccesorio(pre(h)))}
+  \medskip
+  
+  %aseguras relevantes
+  \asegura[nuevoIngreso]{mismos(ingresos(h), ((d, f),a) : ingresos(pre(h))}
+  \asegura[nuevoHuesped]{mismos(huespedes(h), d : huespedes(pre(h)))}
+  \medskip
+
+  \asegura[igualCantidadDeReservas]{|reservas(h)| == |reservas(pre(h))|}
+  \asegura[estanLasDeAntesSalvoLaNoConfirmadaAsociadaAlIngreso]{
+      (\forall r \selec reservas(pre(h)),\\
+      \lnot esReservaSinConfirmarAsociadaAlIngreso(r, d, f, a)) r \in reservas(h)
+  }
+  \asegura[estaLaAsociadaAlIngresoYaConfirmada]{
+    (\exists r \in reservas(h))\\
+    esReservaConfirmadaAsociadaAlIngreso(h,d,f,a)
+  }
+  \medskip
+  
+  \coloredAux{habitacionEstaOcupada}{h:Hotel, d: DNI, f: Fecha, a: Habitacion}{\bool}
+  {
+    \\
+  	(\exists i \selec ingresos(h), sgd(i) == a)\\
+    ((fechaCheckIn(prm(i)) \leq f) \land noHizoCheckOut(h, d, prm(i), f))
+  }
+
+  \coloredAux{noHizoCheckOut}{h: Hotel, d: DNI, ci: CheckIn, f: Fecha}{\bool}
+  {
+    \\
+    \lnot (\exists co \selec salidasDe(h,d), fechaCheckOut(co) \leq f) esCheckInAsociado(h, co, ci)
+  }
+  
+  \coloredAux{esReservaSinConfirmarAsociadaAlIngreso}{h: Hotel, d: DNI, f:Fecha, a: Habitacion}{\bool}
+  {
+    \\
+    (documento(r) == d \land fechaDesde(r) == f \land tipo(r) == a \land \lnot confirmada(r))
+  }
+
+  \coloredAux{esReservaConfirmadaAsociadaAlIngreso}{h: Hotel, d: DNI, f:Fecha, a: Habitacion}{\bool}
+  {
+    \\
+    (documento(r) == d \land fechaDesde(r) == f \land tipo(r) == a \land confirmada(r))
+  }
+\end{problema}

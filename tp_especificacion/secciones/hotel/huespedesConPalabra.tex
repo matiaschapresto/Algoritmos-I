@@ -1,0 +1,40 @@
+\begin{problema}{huespedesConPalabra}{h: Hotel}{[DNI]}
+\medskip
+%\asegura[resultadosTienenPalabra]{(\forall p \selec result) \exists ci \selec ingresosDe(h, p), co \selec salidasDe(h, p) \\
+	%r \selec reservasDe(h, p), confirmado(r)) reservaDeBuenaFe(ci, co, r)}
+\asegura{
+	mismos(result, 
+		sacarRepetidos(\\
+		  \comp{
+			  documento(r)
+		  }{
+			  r \selec reservas(h), confirmada(r), respetoSusReservas(h, documento(r))
+		  }\\
+		)
+	)
+}
+
+% \aux{reservaDeBuenaFe}{ci: CheckIn, co: CheckOut, res: Reserva}{\bool}{
+% 	fechaCheckIn(ci) == FechaDesde(res) \land
+% 	fechaCheckOut(co) == FechaHasta(res)
+% }
+\medskip
+
+\aux{respetoSusReservas}{h: Hotel, d: DNI}{\bool}{
+    (\forall r \selec reservasDe(h,d),confirmada(r))\\
+    hizoCheckInCorrectamente(h,r) \land hizoCheckOutCorrectamente(h,r)
+}
+
+\aux{hizoCheckInCorrectamente}{h: Hotel, r: Reserva}{\bool}
+{
+  (\exists ci \selec ingresosDe(h, documento(r)))\\
+  fechaCheckIn(ci) == fechaDesde(r)
+}
+
+\aux{hizoCheckOutCorrectamente}{h: Hotel, r: Reserva}{\bool}
+{
+  (\exists co \selec salidasDe(h, documento(r)))\\
+  fechaCheckOut(co) == fechaHasta(r)
+}
+
+\end{problema}

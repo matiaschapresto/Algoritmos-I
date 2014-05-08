@@ -1,0 +1,42 @@
+\begin{problema}{registrarHuesped}{h: Hotel, d: DNI, f:Fecha, a: Habitacion}{} 
+  
+  %garantiza inv habitacionesValidas, inv reservasValidas
+  \requiere{a \in habitaciones(h)}
+  %garantiza inv siEstanNoSeFueron, inv noVuelveElMismoDia
+  \requiere[sinCheckOutPosterior]{\lnot(\exists co \selec salidasDe(h, d))f \leq fechaCheckOut(co)}
+  %garantiza inv siSeVaEntro
+  %garantiza inv estanAlMenosUnDia
+  %garantiza inv noEntranDosVeces
+  \requiere[siVieneNoEstaba]{d \notin huespedes(h)}
+
+  \requiere[existeReservaSinConfirmar]{(\exists r \selec reservas(h)) esReservaActualSinConfirmar(r, d, f, a)}
+  \medskip
+  
+  \modifica{h}
+  \asegura[mismoNombre]{nombre(h) == nombre(pre(h))}
+  \asegura[mismaCadena]{cadena(h) == cadena(pre(h))}
+  \asegura[mismasHabitaciones]{mismos(habitaciones(h),habitaciones(pre(h)))}
+  \asegura[mismasSalidas]{mismos(salidas(h), salidas(pre(h)))}
+  \asegura[mismasTarifas]{mismos(tarifaHabitacionXDia(h), tarifaHabitacionXDia(pre(h)))}
+  \asegura[mismosAccesorios]{mismos(precioAccesorio(h), precioAccesorio(pre(h)))}
+  \medskip
+  
+  %aseguras relevantes
+  \asegura[nuevoIngreso]{mismos(ingresos(h), ((d, f),a) : ingresos(pre(h))}
+  \asegura[nuevoHuesped]{mismos(huespedes(h), d : huespedes(pre(h)))}
+  \asegura[reservasCorrectasA]{(\forall r \selec reservas(h))\\
+      (r \in reservas(pre(h)) \lor esReservaActualConfirmada(r, d, f, a) )}
+  \asegura[reservasCorrectasB]{\lnot (\exists r \selec reservas(h)) esReservaActualSinConfirmar(r, d, f, a)}
+  \asegura[reservasCompletasA]{(\forall r \selec reservas(pre(h)), \lnot esReservaActualSinConfirmar(r, d, f, a))\\
+  r \in reservas(h)}
+  \asegura[reservasCompletasB]{(\exists r \selec reservas(h)) esReservaActualConfirmada(r, d, f, a)}
+  \asegura{sinRepetidos(reservas(h))}
+  \medskip
+
+  
+  \aux{esReservaActualSinConfirmar}{r: Reserva, d: DNI, f:Fecha}{\bool}{(documento(r) == d\\
+      \land fechaDesde(r) == f \land tipo(r) == a \land \lnot confirmada(r))}
+  \aux{esReservaActualConfirmada}{r: Reserva, d: DNI, f:Fecha}{\bool}{(documento(r) == d\\
+      \land fechaDesde(r) == f \land tipo(r) == a \land confirmada(r))}
+  
+\end{problema}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="TPI" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin\Debug\TPI" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\Release\TPI" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="..\src\Test.cpp" />
+		<Unit filename="..\src\Test.h" />
+		<Unit filename="..\src\habitacion.cpp" />
+		<Unit filename="..\src\habitacion.h" />
+		<Unit filename="..\src\hotel.cpp" />
+		<Unit filename="..\src\hotel.h" />
+		<Unit filename="..\src\interfaz.cpp" />
+		<Unit filename="..\src\interfaz.h" />
+		<Unit filename="..\src\lista.h" />
+		<Unit filename="..\src\mainHoteles.cpp" />
+		<Unit filename="..\src\ministerio.cpp" />
+		<Unit filename="..\src\ministerio.h" />
+		<Unit filename="..\src\reserva.cpp" />
+		<Unit filename="..\src\reserva.h" />
+		<Unit filename="..\src\tipos.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

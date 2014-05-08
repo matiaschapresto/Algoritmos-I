@@ -1,0 +1,5 @@
+\begin{problema}{noHaySalidaEnMedio}{CheckIn ci, CheckOut co, this: Hotel}{\bool}
+    \medskip
+	\requiere {prm(ci) == prm(co)}	
+    \asegura { result == \lnot (\exists oco \selec salidas(this)), prm(oco) == prm(ci)) fechaCheckIn(ci) < fechaCheckOut(oco) < fechaCheckOut(co)) }	
+\end{problema}

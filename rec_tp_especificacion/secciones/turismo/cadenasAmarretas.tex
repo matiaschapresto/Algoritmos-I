@@ -1,0 +1,11 @@
+\begin{problema}{cadenasAmarretas}{m: MinisterioDeTurismo}{[Cadena]}
+	\medskip
+	
+	\asegura{mismos(result, \comp{cadena(cab(c))}{c \selec cadenaDeHoteles(m), seaCadenaAmarreta(m, c)})}
+	\medskip
+	
+	\coloredAux{seaCadenaAmarreta}{m: MinisterioDeTurismo, c: [Hotel]}{\bool}
+	{
+		\\ \lnot (\exists c2 \selec cadenaDeHoteles(m)) |provinciasDeCadena(m, c2)| < |provinciasDeCadena(m, c)|		
+	}	
+\end{problema}

@@ -1,0 +1,92 @@
+**PC -> I**
+
+PC: ci == prm(ingresos_i) && result == [] && j == 0 && longitud == |salidas(this)| && in=ingresos_i
+
+la parte de ci == prm(ingresos_i) y longitud == |salidas(this)| esta igual en I
+
+la parte de j: j == 0 -> j=> 0 y como longitud es mayor a cero por prop de listas
+->    0<=j<=longitud
+
+
+result == [] y como j== 0 -> result == [prm(prm(in)) | in <- [ingresos(i)], co <- salidas(this)[0..0), prm(prm(in)) == prm(co) && noHaySalidaEnElmedio(prm(in),co) && hayReserva(in,co)]
+
+
+y como [0..0) == [ ] esta todo mas que piola
+
+
+             
+**I y !B -> Qc**
+
+I: [prm(prm(in)) | in <- [ingresos(i)], o <- salidas(this)[0..j), prm(prm(in)) == prm(co) && noHaySalidaEnElMedio(prm(in),co) && hayReserva(in,co)]
+
+!B : j => longitud
+
+de aca sacamos que j == longitud
+
+luego, como j == longitud y longitud == |salidas|
+
+reemplazando en I : result== [prm(prm(in)) | in <- [ingresos(this)_i], o <- salidas(this), prm(ci) == prm(co) && noHaySalidaEnElmedio(prm(in),co) && hayReserva(in,co)]
+
+lo que es exactamente QC
+
+
+**I se mantiene**
+
+En E1: vale result== [prm(prm(in)) | in <- [ingresos(i)], o <- salidas(this)[0..j), prm(prm(in)) == prm(co) && noHaySalidaEnElmedio((prm(in),co) && hayReserva(in,co)]
+	 && 0<=j<longitud && longitud == |salidas(this)| && ci == ingresos_i
+
+
+quiero ver que en E3 vale result== [prm(prm(in)) | in <- [ingresos(i)], o <- salidas(this)[0..j@E3), prm(prm(in)) == prm(co) && noHaySalidaEnElmedio(prm(in),co) && hayReserva(in,co)]
+ && 0<=j@E3<=longitud
+
+ya que longitud y ci no se modifican
+
+
+veamos la parte de j
+
+en E2: vale j == j@E1 
+
+enQif vale j == j@E2
+
+en e3 vale j == j@E3
+
+como j@E1 < longitud por la guarda, por aritmetica turbia
+
+j@E1 + 1 < longitud + 1  -> j@E1 +1 <= longitud -> j@E3 <=  longitud (por estados)
+
+
+
+veamos la parte  de result
+
+*******si vale la guarda del if->
+
+( prm(ci) == prm(co) && noHaySalidaEnElMedio(ci,co) && hayReserva(ci,co) && result == result@E2 ++ [ci])
+
+y result@E2 == result@E1 == [prm(prm(in)) | in <- [ingresos(i)], o <- salidas(this)[0..j), prm(prm(in)) == prm(co) && noHaySalidaElMedio(prm(in),co) && hayReserva(in,co)]
+
+
+-> result @Qif == [prm(prm(in))| in <- [ingresos(i)], o <- salidas(this)[0..j), prm(prm(in)) == prm(co) && noHaySalidaElMedio(prm(in),co) && hayReserva(in,co)] ++ [ci]
+
+
+y sabemos por la guarda del if que ci cumple con todas las condiciones de la lista por comprension, 
+entonce spodemos concaternarlo y result ==
+
+[prm(prm(in)) | in <- [ingresos(i)], o <- salidas(this)[0..j], prm(prm(in)) == prm(co) && noHaySalidaElMedio(prm(in),co) && hayReserva(in,co)]
+
+y por propiedades de intervalos podemos abrir el intervalo a [0..j+1)
+
+en e3 result no cambia y j == j@Qif + 1 por lo que result == [prm(prm(in)) | in <- [ingresos(i)], o <- salidas(this)[0..j@e3), prm(prm(in)) == prm(co) && noHaySalidaEnElmEdio(prm(in),co) && hayReserva(in,co)]
+
+y re reestablece el invariante
+
+*********si no vale la guarda del if->
+
+( prm(ci) != prm(co) || !noHaySalidaEnElMedio(ci,co) || !hayReserva(in,co) && result == result@E2 
+
+y result@E2 == result@E1 == [prm(prm(in)) | in <- [ingresos(i)], co <- salidas(this)[0..j), prm(prm(in)) == prm(co) && noHaySalidaElMedio(prm(in),co) && hayReserva(in,co)]
+
+
+entonces, como sabemos que el elemento j-ésimo de salidas no cumple la condicion de la lista, podemos
+cerrar el intervalo [0..j] ya que la lista hasta j-1 y hasta j son identicas (por pror de listas por comprension)
+
+finalmente como [0..j] ==[0..j@E3) por lo que dijimos antes se reestablece el invariante

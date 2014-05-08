@@ -1,0 +1,20 @@
+%Este problema, dados un hotel h y una fecha f,
+%devolvera verdadero s y solo si la cantidad de plazas reservadas (calculada a partir de las capacidades de cada tipo de
+%habitacion reservada) es estrictamente superior que la capacidad total del hotel.
+%La capacidad del hotel puede calcularse considerando cada una de sus habitaciones y su correspondiente tipo.
+
+\begin{problema}{sobreReservado}{h: Hotel, f: Fecha}{\bool}
+\medskip
+\asegura{result == (cantidadPlazasReservadasEnFecha(h,f) > capacidad(h))}
+\medskip
+
+%considero fechaHasta como la fecha de checkout (el huesped ya no ocupa la habitacion en esa fechaDesde
+%sino que se va a la manana
+\coloredAux{cantidadPlazasReservadasEnFecha}{h: Hotel, f: Fecha}{\ent}{\sum \comp{cantidadHuespedes
+(tipo(r))}{r \selec reservas(h),\\ reservaIncluyeFecha(r,f)}}
+\coloredAux{reservaIncluyeFecha}{r: Reserva, f: Fecha}{\bool}{((fechaDesde(r) \leq f) \land (f < fechaHasta(r)))}
+
+% \color{Red}{Revisar si se pide no confirmada o no se pide nada, la cantidad que se suma es}
+% \color{Red}{ (la de reservas sin confirmar $\lnot$ (confirmada(r)) o (las reservas sin confirmar mas la gente que ya esta en el hotel (ninguna condicion sobre r)) }
+
+\end{problema}

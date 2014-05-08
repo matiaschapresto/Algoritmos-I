@@ -1,0 +1,6 @@
+\begin{problema}{procesarIesimoIngreso}{i: \ent, this: Hotel}{[Dni]}
+    \medskip
+	\requiere {i < |ingresos(this)|}
+    \asegura {result == \comp{prm(prm(in))}{in \selec [ingresos(this)_i], co \selec salidas(this),\\
+	prm(prm(in)) == prm(co) \land noHaySalida(prm(in), co, this) \land hayReserva(in, co, this)]}}
+\end{problema}   

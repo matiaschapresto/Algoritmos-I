@@ -1,0 +1,6 @@
+%garantiza que ningún huesped tenga dos checkIn el mismo dıa
+
+\coloredInvariante[noEntranDosVeces]{sinRepetidos([prm(ingreso)|ingreso \selec ingresos(h)])}
+
+%obtengo una lista con todos los checkin registrados (indiferentemente de la habitacion)
+%y me aseguro de que no haya repetidos (dos checkIn son iguales si tienen el mismo dni y fecha)

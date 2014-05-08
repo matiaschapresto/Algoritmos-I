@@ -1,0 +1,145 @@
+# depslib dependency file v1.0
+1354414042 source:j:\devel\algo1\tp_imperativo\src\hotel.cpp
+	<sstream>
+	"hotel.h"
+
+1354482107 j:\devel\algo1\tp_imperativo\src\hotel.h
+	"reserva.h"
+	"habitacion.h"
+
+1352410527 j:\devel\algo1\tp_imperativo\src\reserva.h
+	"tipos.h"
+	"lista.h"
+
+1351552964 j:\devel\algo1\tp_imperativo\src\tipos.h
+	<string>
+	<iostream>
+
+1352089203 j:\devel\algo1\tp_imperativo\src\lista.h
+	<list>
+	<iostream>
+
+1352410486 j:\devel\algo1\tp_imperativo\src\habitacion.h
+	"tipos.h"
+	"lista.h"
+
+1352091780 source:j:\devel\algo1\tp_imperativo\src\interfaz.cpp
+	"interfaz.h"
+	<iostream>
+	<string>
+
+1352045209 j:\devel\algo1\tp_imperativo\src\interfaz.h
+	<iostream>
+	<fstream>
+	<stdio.h>
+	<stdlib.h>
+	"Test.h"
+
+1352045209 j:\devel\algo1\tp_imperativo\src\test.h
+	"reserva.h"
+	"habitacion.h"
+	"hotel.h"
+	"ministerio.h"
+
+1352425711 j:\devel\algo1\tp_imperativo\src\ministerio.h
+	"hotel.h"
+
+1352408580 source:j:\devel\algo1\tp_imperativo\src\mainhoteles.cpp
+	"interfaz.h"
+
+1352426132 source:j:\devel\algo1\tp_imperativo\src\ministerio.cpp
+	"ministerio.h"
+	"limits.h"
+	<sstream>
+	<fstream>
+
+1352429216 source:j:\devel\algo1\tp_imperativo\src\test.cpp
+	<algorithm>
+	<iostream>
+	<vector>
+	<sstream>
+	"reserva.h"
+	"habitacion.h"
+	"hotel.h"
+	"ministerio.h"
+
+1352423411 source:j:\devel\algo1\tp_imperativo\src\reserva.cpp
+	<istream>
+	"reserva.h"
+
+1352410476 source:j:\devel\algo1\tp_imperativo\src\habitacion.cpp
+	<sstream>
+	"habitacion.h"
+
+1354223189 source:c:\users\matias\desktop\algo1\tp_imperativo\src\habitacion.cpp
+	<sstream>
+	"habitacion.h"
+
+1354223189 c:\users\matias\desktop\algo1\tp_imperativo\src\habitacion.h
+	"tipos.h"
+	"lista.h"
+
+1354223189 c:\users\matias\desktop\algo1\tp_imperativo\src\tipos.h
+	<string>
+	<iostream>
+
+1354223189 c:\users\matias\desktop\algo1\tp_imperativo\src\lista.h
+	<list>
+	<iostream>
+
+1354315913 source:c:\users\matias\desktop\algo1\tp_imperativo\src\hotel.cpp
+	<sstream>
+	"hotel.h"
+
+1354315842 c:\users\matias\desktop\algo1\tp_imperativo\src\hotel.h
+	"reserva.h"
+	"habitacion.h"
+
+1354223189 c:\users\matias\desktop\algo1\tp_imperativo\src\reserva.h
+	"tipos.h"
+	"lista.h"
+
+1354223189 source:c:\users\matias\desktop\algo1\tp_imperativo\src\interfaz.cpp
+	"interfaz.h"
+	<iostream>
+	<string>
+
+1354223189 c:\users\matias\desktop\algo1\tp_imperativo\src\interfaz.h
+	<iostream>
+	<fstream>
+	<stdio.h>
+	<stdlib.h>
+	"Test.h"
+
+1354223189 c:\users\matias\desktop\algo1\tp_imperativo\src\test.h
+	"reserva.h"
+	"habitacion.h"
+	"hotel.h"
+	"ministerio.h"
+
+1354223189 c:\users\matias\desktop\algo1\tp_imperativo\src\ministerio.h
+	"hotel.h"
+
+1354223189 source:c:\users\matias\desktop\algo1\tp_imperativo\src\mainhoteles.cpp
+	"interfaz.h"
+
+1354223189 source:c:\users\matias\desktop\algo1\tp_imperativo\src\ministerio.cpp
+	"ministerio.h"
+	"limits.h"
+	<sstream>
+	<fstream>
+
+1354223189 source:c:\users\matias\desktop\algo1\tp_imperativo\src\reserva.cpp
+	<istream>
+	"reserva.h"
+
+1354226257 source:c:\users\matias\desktop\algo1\tp_imperativo\src\test.cpp
+	<algorithm>
+	<iostream>
+	<vector>
+	<sstream>
+	"reserva.h"
+	"habitacion.h"
+	"hotel.h"
+	"ministerio.h"
+

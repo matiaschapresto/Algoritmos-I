@@ -1,0 +1,40 @@
+\begin{tipo}{Hotel}
+    \observador{nombre}{h: Hotel}{Nombre}
+    \observador{cadena}{h: Hotel}{Cadena}
+    \observador{huespedes}{h: Hotel}{[DNI]}
+    \observador{habitaciones}{h: Hotel}{[Habitacion]}
+    \observador{ingresos}{h: Hotel}{[(CheckIn, Habitacion)]}
+    \observador{salidas}{h: Hotel}{[CheckOut]}
+    \observador{reservas}{h: Hotel}{[Reserva]}
+    \observador{tarifaHabitacionXDia}{h: Hotel}{[(TipoHabitacion, Dinero)]}
+    \observador{precioAccesorio}{h: Hotel}{[(Accesorio, Dinero)]}
+
+    \vspace{0.1cm}
+    
+    \invariante[habitacionesValidas]{(\forall c \selec ingresos(h)) snd(c) \in habitaciones(h)}
+
+    \invariante[siEstanNoSeFueron]{(\forall d \selec huespedes(h)) |ingresosDe(h, d)| == |salidasDe(h,d)|+1}
+
+    \input{secciones/hotel/siSeVaEntro.tex}
+    
+    \input{secciones/hotel/estanAlMenosUnDia.tex}
+    
+    \input{secciones/hotel/noEntranDosVeces.tex}
+
+    \invariante[reservasValidas]{(\forall r \selec reservas(h)) existeUnaHabitacionDelTipo(h, tipo(r))}
+
+    \invariante[sinTarifasRepetidas]{sinRepetidos([prm(t)|t \selec tarifaHabitacionXDia(h)])}
+
+    \invariante[sinPreciosRepetidos]{sinRepetidos([prm(p)|p \selec precioAccesorio(h)])}
+
+    \invariante[tarifasPositivas]{(\forall t \selec tarifaHabitacionXDia(h)) snd(t) > 0}
+
+    \invariante[preciosPositivos]{(\forall p \selec precioAccesorio(h)) snd(p) > 0}
+
+    \invariante[noValeAcaparar]{(\forall r1, r2 \selec reservas(h), tipo(r1)==tipo(r2)\\
+    \land documento(r1)==documento(r2) \land fechaDesde(r1)==fechaDesde(r2)) r1==r2}
+  
+    \invariante[noVuelveElMismoDia]{\neg(((\exists ci \selec ingresos(h))(\exists co \selec salidas(h))\\dniCheckIn(prm(ci))==dniCheckOut(co) \land fechaCheckIn(prm(ci))==fechaCheckOut(co)))}
+
+
+\end{tipo}

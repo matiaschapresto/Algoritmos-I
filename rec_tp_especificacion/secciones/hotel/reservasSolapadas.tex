@@ -1,0 +1,18 @@
+\begin{problema}{reservasSolapadas}{h: Hotel, d: DNI}{\bool}
+	\medskip
+	
+	\asegura{ result == diasRepetidosEnReservasPorDNI(h,d) }	
+	\medskip
+	
+	\coloredAux{diasRepetidosEnReservasPorDNI}{h: Hotel, d: DNI}{\bool}
+	{
+		\\
+		\lnot sinRepetidos(fechasReservadasPorDNI(h ,d))
+	}
+	
+	\coloredAux{fechasReservadasPorDNI}{h: Hotel, d: DNI}{[Fecha]}
+	{
+		\comp{f}{r \selec reservasDe(h,d),\\
+		 f \selec [fechaDesde(r)..fechaHasta(r)], \lnot confirmada(r)}
+	}
+\end{problema}

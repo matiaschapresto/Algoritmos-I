@@ -1,0 +1,139 @@
+\documentclass[a4paper]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+%\usepackage{bbm}
+\usepackage{framed}
+\usepackage{graphicx} %Para incluir el logo de la UBA
+\usepackage{caratula} %Para armar el cuadro de integrantes
+\input{macrosAlgo1}
+
+\newcommand{\comen}[2]{%
+\begin{framed}	
+\noindent \textsf{#1:} #2
+\end{framed}
+}
+
+\begin{document}
+
+%\materia{Algoritmos y Estructura de Datos I}
+%\cuatrimestre{2}
+%\anio{2012}
+
+%\fecha{30 de Agosto de 2012}
+
+%\nombre{\LARGE TPE De Hoteles y Pasajeros}
+
+%\titulotp
+
+%---------------------
+
+\integrante{Almansi, Emilio Guido}{674/12}{ealmansi@gmail.com}
+\integrante{Vilerino, Silvio Fernando}{106/12}{svilerino@gmail.com}
+\integrante{Chapresto, Matias Nahuel}{201/12}{matiaschapresto@gmail.com}
+\integrante{Erdei, Alan}{170/12}{alane1993@hotmail.com}
+
+\def\Materia{Algoritmos y Estructura de Datos I}
+\cuatrimestre{2}
+\anio{2012}
+\def\Titulo{\LARGE TPE De Hoteles y Pasajeros}
+\def\Grupo{Los Simuladores}
+\def\Fecha{7 de septiembre de 2012}
+
+%----- CARATULA -----%
+
+\thispagestyle{empty}
+
+\begin{center}
+	\includegraphics[scale = 0.25]{imagenes/logo_uba.jpg}
+\end{center}
+
+\vspace{5mm}
+
+\begin{center}
+	{\textbf{\large UNIVERSIDAD DE BUENOS AIRES}}\\[1.5em]
+	{\textbf{\large Departamento de Computaci\'{o}n}}\\[1.5em]
+    {\textbf{\large Facultad de Ciencias Exactas y Naturales}}\\
+    \vspace{20mm}
+    {\LARGE\textbf{\Materia}}\\[1em]    
+    \vspace{5mm}
+    {\LARGE\textbf{\cuatrimestreLindo de \elanio}}\\
+    \vspace{15mm}
+    {\Large \textbf{\Titulo}}\\[1em]
+    \vspace{15mm}
+    {\textbf{\Large \Fecha}}\\
+    \vspace{15mm}
+    {\textbf{\Large Grupo \Grupo}}\\
+    \vspace{10mm}
+    \textbf{\tablaints}
+\end{center}
+
+%-----------------------
+
+\newpage
+
+\tableofcontents
+
+\medskip
+
+\newpage
+
+\section{Tipos}
+\input{secciones/tipos/tipos.tex}
+\vspace{0.5cm}
+
+\section{Reserva}
+\input{secciones/reserva/reserva.tex}
+\vspace{0.5cm}
+
+\section{Habitaci\'on}
+\input{secciones/habitacion/habitacion.tex}
+
+\subsection{pretensionesDePopStar}
+\input{secciones/habitacion/pretencionesDePopStar.tex}
+
+\newpage
+
+\section{Hotel}
+\input{secciones/hotel/hotel.tex}
+
+\subsection{sobreReservado}
+\input{secciones/hotel/sobreReservado.tex}
+
+\subsection{registrarHuesped}
+\input{secciones/hotel/registrarHuesped.tex}
+
+\subsection{desRegistrarHuesped}
+\input{secciones/hotel/desRegistrarHuesped.tex}
+
+\subsection{huespedesConPalabra}
+\input{secciones/hotel/huespedesConPalabra.tex}
+
+\subsection{calcularCuenta}
+\input{secciones/hotel/calcularCuenta.tex}
+
+\subsection{reservasSolapadas}
+\input{secciones/hotel/reservasSolapadas.tex}
+
+\newpage
+
+\section{MinisterioDeTurismo}
+\input{secciones/turismo/turismo.tex}
+
+\subsection{cadenasAmarretas}
+\input{secciones/turismo/cadenasAmarretas.tex}
+
+\subsection{fusionAutorizada}
+\input{secciones/turismo/fusionAutorizada.tex}
+
+\newpage
+
+\section{Auxiliares}
+\input{secciones/auxiliares/auxiliares.tex}
+
+\newpage
+
+\section{Comentarios}
+\input{comentarios.tex}
+
+\end{document}

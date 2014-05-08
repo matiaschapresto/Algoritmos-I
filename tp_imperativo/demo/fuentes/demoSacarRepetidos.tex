@@ -1,0 +1,81 @@
+\small Las implicaciones mas importantes estan en \textcolor{NavyBlue}{AZUL}\\
+\small Referirse a los estados mas arriba cuando sea necesario\\
+\vspace{2mm}
+
+\subsection{Pc $ \Rightarrow $ I}
+\begin{itemize}
+	\item $ ^1 $ \textcolor{NavyBlue}{longitud == $ |dnis| $}
+	\item $ ^2 $ i == 0 $ \Rightarrow $ i $ \leq $ longitud
+	\item $ ^2 $ i == 0  $ \Rightarrow $ 0 $ \leq $ i
+	\item \textcolor{NavyBlue}{0 $ \leq $ i $ \leq $ longitud}
+	\item $ ^3 $ i == 0 $ \Rightarrow $ \textcolor{NavyBlue}{result == [] } == [$ dnis_k $ $ | $ k$ \selec $[0..0), ($ \lnot $$ \exists $j$ \selec $[0..k)) $ dnis_j $ == $ dnis_k $]
+	\item \textcolor{NavyBlue}{0 $ \leq $ i $ \leq $ longitud $ \land $ longitud == $ |dnis| $ $ \land $ result == [$ dnis_k $ $ | $ k$ \selec $[0..i), ($ \lnot $$ \exists $j$ \selec $[0..k)) $ dnis_j $ == $ dnis_k $ ]} \checkmark
+\end{itemize}
+\vspace{3mm}
+
+
+\noindent $ ^1 $ Por poscondición del problema \emph{longitud} definido para el tipo Lista.\\
+$ ^2 $ Porque longitud $\geq$ 0 (por ser $longitud == |dnis|$) y por propiedades de los números enteros\\
+$ ^3 $ Propiedades de listas\\
+
+\subsection{(I $ \land $ $ \lnot $B) $ \Rightarrow $ Qc}
+\begin{itemize}
+	\item $ ^1 $ (I $ \land $ $ \lnot $B) $ \Rightarrow $ i == longitud
+	\item $ ^2 $ \textcolor{NavyBlue}{ result == [$ dnis_k $$ | $ k$ \selec $[0..longitud), ($ \lnot $$ \exists $j$ \selec $[0..k)) $ dnis_j $ == $ dnis_k $]} \checkmark
+\end{itemize}
+
+\vspace{3mm}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Se infiere de I\\
+
+\subsection{Funcion variante decrece}
+\begin{itemize}
+	\item Fv: longitud - i
+	\item $ i@e3 == i@e2 + 1 == i@e1 + 1 $
+	\item $ ^1 $ $ i@e3 > i@e1 $
+	\item $ ^1 $ $ - i@e3 < - i@e1 $
+	\item $ ^2 $ \textcolor{NavyBlue}{ $ longitud - i@e3 < longitud - i@e1 $} \checkmark	
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Sumando longitud a ambos lados\\
+
+\subsection{I $ \land $ $ Fv \leq Cota $ $ \Rightarrow $ $ \lnot $ B}
+\begin{itemize}
+	\item Fv: longitud - i
+	\item Cota: 0
+	\item Fv $ \leq $ Cota $ \Rightarrow $ $ longitud - i \leq 0 $ 
+	\item longitud $ \leq $ i
+	\item B: i $ < $ longitud $ \Rightarrow $ $ \lnot $ B: longitud $ \leq $ i
+	\item \textcolor{NavyBlue}{ $ \lnot $ B $ \Leftrightarrow $ Fv  $ \leq $ Cota} \checkmark	
+\end{itemize}
+\vspace{3mm}
+
+\subsection{El cuerpo del ciclo preserva el invariante}
+\begin{itemize}
+	\item $ ^1 $ $ ^2 $ 0 $ \leq $ i@e1 $ \Rightarrow $ 0 $ \leq $ i@e1 + 1
+	\item $ ^3 $ 0 $ \leq $ i@e3
+	\item $ ^1 $ $^2 $ i@e1 $ < $ longitud $ \Rightarrow $ i@e1 + 1 $ < $ longitud + 1
+	\item $ ^3 $ i@e3 $ \leq $ longitud	
+	\item \textcolor{NavyBlue}{0 $ \leq $ i@e3 $ \leq $ longitud} \checkmark
+	\item Si vale ( ($ dnis_{i@e1} $ $ \in $ result) $ \land $ (result == result@e1) ) entonces
+	\item $ ^4 $ result == [$ dnis_k $$|$ k$ \selec $[0..i@e1 + 1), ($ \lnot $$ \exists $j$ \selec $[0..k)) $ dnis_j $ == $ dnis_k $]
+	\item $ ^3 $ \textcolor{NavyBlue}{result == [$ dnis_k $$|$ k$ \selec $[0..i@e3), ($ \lnot $$ \exists $j$ \selec $[0..k)) $ dnis_j $ == $ dnis_k $]} \checkmark
+	\item Si vale ( ($ dnis_{i@e1} $ $ \notin $ result) $ \land $ (result == result@e1 ++ [$ dnis_i@e1 $]) ) entonces
+	\item result@e1 == [$ dnis_k $$|$ k$ \selec $[0..i@e1), ($ \lnot $$ \exists $j$ \selec $[0..k)) $ dnis_j $ == $ dnis_k $]
+	\item result@e1 ++ [$ dnis_i@e1 $] == [$ dnis_k $| k$ \selec $[0..i@e1), ($ \lnot $$ \exists $j$ \selec $[0..k)) $ dnis_j $ == $ dnis_k $] ++ [$ dnis_i@e1 $]
+	\item $ ^5 $ result@e1 ++ [$ dnis_i@e1 $] == [$ dnis_k $ $|$ k$ \selec $[0..i@e1], ($ \lnot $$ \exists $j$ \selec $[0..k)) $ dnis_j $ == $ dnis_k $]
+	\item $ ^6 $ $ ^7 $ result@e3 == [$ dnis_k $$|$ k$ \selec $[0..i@e1 + 1), ($ \lnot $$ \exists $j$ \selec $[0..k)) $ dnis_j $ == $ dnis_k $]
+	\item $ ^3 $ \textcolor{NavyBlue}{result@e3 == [$ dnis_k $$|$ k$ \selec $[0..i@e3), ($ \lnot $$ \exists $j$ \selec $[0..k)) $ dnis_j $ == $ dnis_k $]} \checkmark
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Vale I $ \land $ B en e1\\
+$ ^3 $ i@e3 == i@e1 + 1\\
+$ ^4 $ Por propiedad de listas como la condicion de la lista no se cumple, podemos utilizar i@e1 + 1\\
+$ ^5 $ Por propiedad de listas podemos incluir al elemento concatenado como parte de la lista por comprension\\
+$ ^6 $ Por propiedad de intervalos\\
+$ ^7 $ result@e3 == result@e2 == result@e1 ++ [$ dnis_i@e1 $]\\

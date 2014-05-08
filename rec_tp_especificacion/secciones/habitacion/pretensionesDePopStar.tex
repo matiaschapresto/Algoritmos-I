@@ -1,0 +1,24 @@
+%A partir de una lista
+%de accesorios as y una lista de habitaciones hs, se debe devolver una lista con aquellas habitaciones de hs que posean
+%la mayor cantidad de accesorios de as.
+
+%interpreto "aquellas habitaciones de hs"
+%como un subconjunto de hs (posiblemente vacío)
+
+\begin{problema}{pretensionesDePopStar}{as: [Accesorio], hs: [Habitacion]}{[Habitacion]}
+    \medskip
+    
+    \asegura{mismos(result,[hb | hb \selec hs, relativamenteSuperEquipada(as,hs,hb)])}
+    \medskip
+    
+    \coloredAux{relativamenteSuperEquipada}{as: [Accesorio], hs: [Habitacion], hb: Habitacion}{\bool}
+    {
+      \\(\forall ohb \selec hs)cantidadAccesoriosPresentes(as,ohb) \leq cantidadAccesoriosPresentes(as,hb)
+    }
+    \coloredAux{cantidadAccesoriosPresentes}{as: [Accesorio], hb: Habitacion}{\ent}{|[a|a \selec accesorios(hb), a \in as]|}
+\end{problema}
+
+% comentarios:
+% si un accesorio viene repetido en as, se lo considerará
+% de la misma forma que si hubiese venido una sola vez
+% las habitaciones no pueden tener accesorios repetidos

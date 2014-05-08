@@ -1,0 +1,18 @@
+\subsection{calcularCuenta}
+
+Se consider\'o que el alquiler de los accesorios se realiza s\'olo una vez (y no por d\'ia como pasa con las habitaciones)
+
+\subsection{sobreReservado}
+
+La fechaHasta correspondiente a la reserva, ser\'a la fecha de check out del huespued, durante la cual se considera que este no ocupa las plazas correspondientes a la habitaci\'on (se ir\'a a la manana)
+
+\subsection{huespedesConPalabra}
+
+Un huesped se considerar\'a de palabra solo si todas sus reservas fueron respetadas. Esto se interpret\'o con el siguiente criterio:
+una reserva fu\'e respetada \'unicamente si fue confirmada, y existe un checkIn y un checkOut con fechas correspondientes
+a las fechas de la reserva. Verificar que exista un checkIn consistente puede considerarse redundante (ya que una reserva se confirma
+cuando el DNI hace CheckIn), sin embargo se incluy\'o en el problema con el fin de explicitar el criterio tomado.
+
+\subsection{invariantes Ministerio}
+
+Se interpret\'o al invariante sinHotelesRepetidos de forma tal que asegura que ning\'un hotel estar\'a repetido bajo el criterio de equivalencia tomado en la funci\'on "hotelesEquivalentes" (por ejemplo, un hotel cuya lista de habitaciones se encuentre en un orden alterado se considerar\'a equivalente)

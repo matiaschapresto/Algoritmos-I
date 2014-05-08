@@ -1,0 +1,11 @@
+\begin{problema}{sobreReservado}{h: Hotel, f: Fecha}{\bool}
+\medskip
+\asegura{result == (cantidadPlazasReservadas(h,f) > capacidad(h))}
+\medskip
+
+%considero fechaHasta como la fecha de checkout (el huesped ya no ocupa la habitacion en esa fechaDesde
+%sino que se va a la manana
+\aux{reservaIncluyeFecha}{r: Reserva, f: Fecha}{\bool}{((fechaDesde(r) \leq f) \land (f < fechaHasta(r)))}
+\aux{cantidadPlazasReservadas}{h: Hotel, f: Fecha}{\ent}{\sum \comp{cantidadHuespedes
+(tipo(r))}{r \selec reservas(h),\\ confirmada(r) \land reservaIncluyeFecha(r,f)}}
+\end{problema}

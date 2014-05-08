@@ -1,0 +1,86 @@
+%problema SinLCDParaTodos (m: MinisterioDeTurismo) = result : Z Este problema modica el ministerio m quitando
+%de todas las habitaciones, de todos los hoteles, de todas las cadenas los LCD que hubiera en ellos.
+%Este es el unico cambio que se debe realizar. Ademas, devuelve la cantidad de LCD que fueron quitados. }
+\begin{problema}{sinLcdParaTodos}{m: MinisterioDeTurismo}{\ent}
+	\medskip
+
+	\modifica{m}
+	\asegura{mismos(secretarias(m), secretarias(pre(m)))}
+	\medskip
+
+	\asegura[igualCantidadDeHotelesPorRegistro]{(\forall p \selec secretarias(m)) \\
+	|registro(m,p)| == |registro(pre(m),p)|}
+	\asegura[estanLosHotelesPreviosPeroSinLcds]{(\forall p \selec secretarias(m)) \\
+	((\forall h \selec registro(pre(m),p)) existeHotelIgualSinLcds( h, registro(m,p) ) )}
+	\medskip
+
+	\asegura[igualCantidadDeCadenas]{|cadenasDeHoteles(m)| == |cadenasDeHoteles(pre(m))|}
+	\asegura[estanLasCadenasPreviasPeroSinLcds]{(\forall c \selec cadenasDeHoteles(pre(m))) \\
+	existeCadenaIgualSinLcds(c, cadenasDeHoteles(m) ) }
+	\medskip
+	
+	\asegura{result == contarLcds(pre(m))}
+	\medskip
+	\medskip
+	\medskip
+
+	\coloredAux{existeHotelIgualSinLcds}{h: Hotel, hs: [Hotel]}{\bool}{
+	 	(\exists oh \in hs) hotelIgualSinLcds(h, oh)
+	}
+	\medskip
+	\coloredAux{hotelIgualSinLcds}{ha, hd: Hotel}{\bool}{
+	 	\\
+		(nombre(ha) == nombre(hd)) \land \\
+		(cadena(ha) == cadena(hd)) \land \\
+		(mismosIngresosSinLcds(ingresos(ha), ingresos(hd))) \land \\
+		(mismos(huespedes(ha), huespedes(hd)) \land \\
+		(mismasHabitacionesSinLcds(habitaciones(ha), habitaciones(hd))) \land \\
+		(mismos(salidas(ha), salidas(hd))) \land \\
+		(mismos(reservas(ha), reservas(hd))) \land \\
+		(mismos(tarifasHabitacionXDia(ha), tarifasHabitacionXDia(hd))) \land \\
+		(mismos(precioAccesorio(ha), precioAccesorio(hd)))
+	}
+	\medskip
+
+	 \coloredAux{mismosIngresosSinLcds}{isAntes, isDesp: [(CheckIn,Habitacion)]}{\bool}{
+	 	\\
+	 	|isAntes| == |isDesp| \land \\
+	 	(\forall i \in isAntes)((\exists oi \selec isDesp)( prm(i) == prm(oi) \land habitacionIgualSinLcd(sgd(i),sgd(oi)) ) )
+	 }
+	 \medskip
+
+	 \coloredAux{mismasHabitacionesSinLcds}{hbsAntes, hbsDesp: [Habitacion]}{\bool}{
+	 	\\
+	 	|hbsAntes| == |hbsDesp| \land  \\
+	 	(\forall hb \selec hbsAntes)((\exists ohb \selec hbsDesp)habitacionIgualSinLcd(hb,ohb))
+	 }
+	 \medskip
+
+	 \coloredAux{habitacionIgualSinLcd}{hAntes,hDesp: Habitacion}{\bool}{
+	 	\\
+	 	numero(hAntes) == numero(hDesp) \land \\
+	 	tipo(hAntes) == tipo(hDesp) \land \\
+	 	accesorios(hDesp) == \comp{a}{a \selec accesorios(hAntes), \lnot a == LCD} \\
+	 }
+	 \medskip
+
+	 \coloredAux{existeCadenaIgualSinLcds}{c: [Hotel], cs: [[Hotel]]}{\bool}{
+	 	(\exists oc \in cs) cadenaIgualSinLcds(c, oc)
+	 }
+	 \medskip
+	 \coloredAux{cadenaIgualSinLcds}{cAntes, cDesp: [Hotel]}{\bool}{
+	 	\\
+	 	|cAntes| == |cDesp| \land \\
+	 	(\forall h \selec cAntes) ((\exists oh \selec cDesp) hotelIgualSinLcds(h,oh))
+	 }
+	 \medskip
+
+	\coloredAux{contarLcds}{m: Ministerio}{\ent}{|\comp{hab}{h \selec todosLosHoteles(m),\\
+	 hab \selec habitaciones(h), LCD \in accesorios(hab) }|}
+	 \medskip
+
+	\coloredAux{todosLosHoteles}{m: Ministerio}{[Hotel]}{aplanar(cadenasDeHoteles(m))}
+	\medskip
+
+
+\end{problema}

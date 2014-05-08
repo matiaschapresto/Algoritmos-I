@@ -1,0 +1,79 @@
+\small Las implicaciones mas importantes estan en \textcolor{NavyBlue}{AZUL}\\
+\small Referirse a los estados mas arriba cuando sea necesario\\
+\vspace{2mm}
+
+\subsection{Pc $ \Rightarrow $ I}
+\begin{itemize}
+	\item $ ^1 $ \textcolor{NavyBlue}{ci == prm($ingresos(this)_i$) y longitud == $|salidas(this)|$} \checkmark
+	\item $ ^2 $ j == 0 $ \Rightarrow $ j $ \leq $ longitud
+	\item $ ^2 $ j == 0  $ \Rightarrow $ 0 $ \leq $ j
+	\item \textcolor{NavyBlue}{0 $ \leq $ j $ \leq $ longitud} \checkmark
+	\item $ ^3 $ $ ^4 $ \textcolor{NavyBlue}{result == [] == [prm(prm(in)) $|$ in $ \selec $ [ingresos(i)], o $ \selec $ $salidas(this)_{[0..0)}$, prm(prm(in) == prm(co) $\land$ noHaySalidaEnElmedio(prm(in),co) $\land$ hayReserva(in,co)]} \checkmark
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Por poscondición del problema \emph{longitud} definido para el tipo Lista.\\
+$ ^2 $ Porque longitud $\geq$ 0 (por ser $longitud == |salidas(this)|$) y por propiedades de los números naturales\\
+$ ^3 $ Propiedades de listas\\
+$ ^4 $ j == 0 \\
+
+\subsection{(I $ \land $ $ \lnot $B) $ \Rightarrow $ Qc}
+
+\begin{itemize}
+	\item $ ^1 $ (I $ \land $ $ \lnot $B) $ \Rightarrow $ j == longitud
+	\item $ ^2 $ \textcolor{NavyBlue}{ result == [prm(prm(in)) $|$ in $\selec$ [$ingresos(this)_i$], o $\selec$ salidas(this), prm(prm(in)) == prm(co) $\land$ noHaySalidaEnElmedio(prm(in),co) $\land$ hayReserva(in,co)]]} \checkmark
+\end{itemize}
+
+\vspace{3mm}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Se infiere de I y propiedades de intervalos\\
+
+\subsection{Funcion variante decrece}
+\begin{itemize}
+	\item Fv: longitud - j
+	\item $ j@e3 == j@Qif + 1 == j@e2 + 1 == j@e1 + 1 $
+	\item $ ^1 $ $ j@e3 > j@e1 $
+	\item $ ^1 $ $ - j@e3 < - j@e1 $
+	\item $ ^2 $ \textcolor{NavyBlue}{ $ longitud - j@e3 < longitud - j@e1 $} \checkmark	
+\end{itemize}
+\vspace{3mm}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Sumando longitud a ambos lados\\
+
+\subsection{I $ \land $ $ Fv \leq Cota $ $ \Rightarrow $ $ \lnot $ B}
+\begin{itemize}
+	\item Fv: longitud - j
+	\item Cota: 0
+	\item Fv $ \leq $ Cota $ \Rightarrow $ $ longitud - j \leq 0 $ 
+	\item longitud $ \leq $ j
+	\item B: j $ < $ longitud $ \Rightarrow $ $ \lnot $ B: longitud $ \leq $ j
+	\item \textcolor{NavyBlue}{ $ \lnot $ B $ \Leftrightarrow $ Fv  $ \leq $ Cota} \checkmark	
+\end{itemize}
+\vspace{3mm}
+
+\subsection{El cuerpo del ciclo preserva el invariante}
+\begin{itemize}
+	\item $ ^1 $ $ ^2 $ 0 $ \leq $ j@e1 $ \Rightarrow $ 0 $ \leq $ j@e1 + 1
+	\item $ ^3 $ 0 $ \leq $ j@e3
+	\item $ ^1 $ $^2 $ j@e1 $ < $ longitud $ \Rightarrow $ j@e1 + 1 $ < $ longitud + 1
+	\item $ ^3 $ j@e3 $ \leq $ longitud	
+	\item \textcolor{NavyBlue}{0 $ \leq $ j@e3 $ \leq $ longitud} \checkmark
+	\item si vale (( prm(ci) == prm(co) $\land$ noHaySalidaEnElMedio(ci,co) $\land$ hayReserva(in,co) $\land$ result == result@E2 ++ [ci]):
+	\item result@E2 == result@E1 == [prm(prm(in)) $|$ in $\selec$ [ingresos(i)], o $\selec$ $salidas(this)_{[0..j)}$, prm(prm(in)) == prm(co) $\land$ noHaySalidaElMedio(prm(in),co) $\land$ hayReserva(in,co)]
+	\item result @Qif == [prm(prm(in)$|$ in $\selec$ [ingresos(i)], o $\selec$ $salidas(this)_{[0..j)}$, prm(prm(in)) == prm(co) $\land$ noHaySalidaElMedio(prm(in),co) $\land$ hayReserva(in,co)] ++ [ci]
+	\item $ ^4 $ result == [prm(prm(in)) $|$ in $\selec$ [ingresos(i)], o $\selec$ $salidas(this)_{[0..j+1)}$, prm(prm(in)) == prm(co) $\land$ noHaySalidaElMedio(prm(in),co) $\land$ hayReserva(in,co)]
+	\item $ ^3 $ \textcolor{NavyBlue}{result == [prm(prm(in)) $|$ in $\selec$ [ingresos(i)], o $\selec$ $salidas(this)_{[0..j@e3)}$, prm(prm(in)) == prm(co) $\land$ noHaySalidaEnElmEdio(prm(in),co) $\land$ hayReserva(in,co)]} \checkmark
+	\item si vale ( prm(ci) != prm(co) $ \lor $ !noHaySalidaEnElMedio(ci,co) $ \lor $ !hayReserva(in,co)) $ \land $ result == result@E2)
+	\item result@E2 == result@E1 == [prm(prm(in)) $|$ in $\selec$ [ingresos(i)], co $\selec$ $salidas(this)_{[0..j)}$, prm(prm(in)) == prm(co) $\land$ noHaySalidaElMedio(prm(in),co) $\land$ hayReserva(in,co)]
+	\item $ ^5 $ las listas son iguales con estos intervalos [0..j] == [0..j@E3)
+	\item \textcolor{NavyBlue}{result == [prm(prm(in)) $|$ in $\selec$ [ingresos(i)], co $\selec$ $salidas(this)_{[0..j@e3)}$, prm(prm(in)) == prm(co) $\land$ noHaySalidaElMedio(prm(in),co) $\land$ hayReserva(in,co)]} \checkmark
+	
+\end{itemize}
+
+\noindent $ ^1 $ Propiedades de los números enteros\\
+$ ^2 $ Vale I $ \land $ B en e1\\
+$ ^3 $ j@e3 == j@e1 + 1\\
+$ ^4 $ Podemos agregar la concatenacion al resultado porque sabemos que vale la guarda del if que es la condicion de la lista por comprension\\
+$ ^5 $ Sabemos que el elemento j-ésimo de salidas no cumple la condicion de la lista, podemos cerrar el intervalo [0..j] ya que la lista hasta j-1 y hasta j son identicas (por prop de listas por comprension)

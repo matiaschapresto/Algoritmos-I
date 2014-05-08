@@ -1,0 +1,18 @@
+% \invariante[estanAlMenosUnDia]{
+% 	%Para cada huesped, obtengo los indices de todos sus ingresos y egresos. 
+% 	%Filtro solo aquellos resultados donde los indices de salidas mayores a los de cada indice de entrada
+% 	%todos estos deben cumplir que la fecha de ingreso es menor o igual a la fecha de salida +1
+% 	( \forall p \selec huespedes(h), ii \selec [0..|ingresosDe(h, p)|),is \selec [ii..|salidasDe(h, p)|)) \\	
+% 	seQuedoAlMenosUnDia(ingresosDe(h, p)_{ii}, salidasDe(h, p)_{is})
+% }
+%v1	
+%todos los ingresos i, salidas s, donde el dni del ingreso y la salida son el mismo 
+%(obtengo lista de checkin y checkout de una misma persona)
+%(\forall i \selec ingresos(h), s \selec salidas(h), prm(prm(i)) == prm(s))
+%para dicha lista quiero que valga que la fecha de la entrada es menor o igual que la fecha de salida mas uno (un dia minimo)
+%snd(prm(i)) \leq snd(s) + 1
+
+\coloredInvariante[estanAlMenosUnDia]{
+	(\forall co \selec salidas(h))\\
+	fechaCheckIn(checkInAsociado(h, co)) \leq fechaCheckOut(co) - 1
+}

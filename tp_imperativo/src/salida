@@ -1,0 +1,75 @@
+
+Hotels
+0. Reserva
+1. Habitacion
+2. Hotel
+3. Ministerio
+4. Tests
+  Ingrese una opcion [0-4]: [H[2JERROR!! Assert r1.documento() == d1 failed
+ on line 51
+ in file Test.cpp
+ msg: El documento de la reserva 1 es incorrecto
+ERROR!! Assert r1.fechaDesde() == desde1 failed
+ on line 52
+ in file Test.cpp
+ msg: La fechaDesde de la reserva 1 es incorrecta
+ERROR!! Assert r1.fechaHasta() == hasta1 failed
+ on line 53
+ in file Test.cpp
+ msg: La fechaHasta de la reserva 1 es incorrecta
+ERROR!! Assert r1.confirmada() == false failed
+ on line 55
+ in file Test.cpp
+ msg: La reserva 1 esta confirmada pero no deberia estarlo
+ERROR!! Assert r2.documento() == d2 failed
+ on line 57
+ in file Test.cpp
+ msg: El documento de la reserva 2 es incorrecto
+ERROR!! Assert r2.fechaDesde() == desde2 failed
+ on line 58
+ in file Test.cpp
+ msg: La fechaDesde de la reserva 2 es incorrecta
+ERROR!! Assert r2.fechaHasta() == hasta2 failed
+ on line 59
+ in file Test.cpp
+ msg: La fechaHasta de la reserva 2 es incorrecta
+ERROR!! Assert r2.confirmada() == true failed
+ on line 61
+ in file Test.cpp
+ msg: La reserva 2 no esta confirmada y deberia estarlo
+ERROR!! Assert r3.documento() == d3 failed
+ on line 63
+ in file Test.cpp
+ msg: El documento de la reserva 3 es incorrecto
+ERROR!! Assert r3.fechaDesde() == desde3 failed
+ on line 64
+ in file Test.cpp
+ msg: La fechaDesde de la reserva 3 es incorrecta
+ERROR!! Assert r3.fechaHasta() == hasta3 failed
+ on line 65
+ in file Test.cpp
+ msg: La fechaHasta de la reserva 3 es incorrecta
+ERROR!! Assert r3.tipo() == tipo3 failed
+ on line 66
+ in file Test.cpp
+ msg: El tipo de habitacion de la reserva 3 es incorrecto
+ERROR!! Assert r3.confirmada() == false failed
+ on line 67
+ in file Test.cpp
+ msg: La reserva 3 esta confirmada pero no deberia estarlo
+ERROR!! Assert mismaLista(ht2.huespedes(),huespedes2) failed
+ on line 322
+ in file Test.cpp
+ msg: El hotel ht2 debe tener los huespedes 37654321 y 30100200
+ERROR!! Assert mismaLista(ht3.huespedes(),huespedes3) failed
+ on line 335
+ in file Test.cpp
+ msg: El hotel ht3 debe tener el huesped 37654321
+ERROR!! Assert ht5.sobreReservado(5)==false failed
+ on line 357
+ in file Test.cpp
+ msg: En el dia 5 el hotel ht5 no debe estar sobrereservado
+ERROR!! Assert ht5.sobreReservado(6)==true failed
+ on line 358
+ in file Test.cpp
+ msg: En el dia 6 el hotel ht5 debe estar sobrereservado

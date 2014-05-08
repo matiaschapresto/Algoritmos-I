@@ -1,0 +1,12 @@
+\begin{problema}{reservasSolapadas}{h: Hotel, d: DNI}{\bool}
+	\medskip
+	
+	\asegura[noInterseccionDeDias]{result == \lnot sinRepetidos(aplanar(diasEstadias(h ,d)))}
+	\medskip
+	
+	\aux{diasEstadias}{h: Hotel, d: DNI}{[[Fecha]]}
+	{
+		\comp{[fechaDesde(r)..fechaHasta(r)]}{r \selec reservasDe(h,d),\\
+		\lnot confirmada(r)}
+	}
+\end{problema}

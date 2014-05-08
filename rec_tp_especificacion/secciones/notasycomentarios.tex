@@ -1,0 +1,16 @@
+\subsection{Notas iniciales}
+Los invariantes de los tipos y los auxiliares del tp realizados por nosotros estar\'an marcados en\\
+   color \textcolor{\ColorColoredCommands}{\emph{azul}} para una mejor diferenciaci\'on con el enunciado.
+
+\subsection{Tipo Habitacion}
+Debido a que la lista de accesorios del observador correspondiente es ordenada (seg\'un el invariante accesoriosOrdenada), la igualdad b\'asica == puede ser utilizada para elementos de tipo Habitacion, as\'i como el operador mismos y el auxiliar sinRepetidos.
+
+\subsection{Tipo Hotel}   
+El invariante estanAlMenosUnDia utiliza el auxiliar checkInAsociado, tomando la cabeza de una lista (obtenerCheckInsAsociados) que, en principio, podr\'ia ser vac\'ia. Sin embargo, el invariante siSeVaEntro garantiza que esta lista nunca lo es (en particular, tiene siempre un elemento).
+Las listas del tipo Hotel son no ordenadas, por lo cual el operador == no admitir\'ia como iguales a hoteles que conceptualmente s\'i lo son; por esta raz\'on, se defini\'o el auxiliar hotelesEquivalentes, y el auxiliar mismosHoteles que conlleva la sem\'antica del operador mismos para elementos de este tipo.
+
+\subsection{Problema RegistrarHuesped}
+Para garantizar que luego de la modificaci\'on sobre el hotel las reservas son aquellas esperadas, se asegura: la cantidad total de reservas es conservada, aquellas reservas no relacionadas con el nuevo ingreso se mantienen en lugar, y el lugar restante corresponde a la reserva asociada al nuevo ingreso (pero ya confirmada).
+
+\subsection{Problema HuespedesConPalabra}
+El criterio para considerar que un huesped es de palabra es el siguiente: el huesped debe tener al menos una reserva confirmada (de lo contrario, nunca ha ingresado en el Hotel, y a\'un no ha sido puesto a prueba), y debe haber respetado todas sus reservas confirmadas (una reserva no confirmada puede tener fecha en el futuro, y a\'un no se sabe si el huesped la respetar\'a o no).

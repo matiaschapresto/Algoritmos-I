@@ -1,0 +1,9 @@
+\begin{tipo}{Reserva}
+	\observador{documento}{r: Reserva}{DNI}
+	\observador{fechaDesde}{r: Reserva}{Fecha}
+	\observador{fechaHasta}{r: Reserva}{Fecha}
+	\observador{tipo}{r: Reserva}{TipoHabitacion}
+	\observador{confirmada}{r: Reserva}{\bool}
+	\medskip
+	\invariante[NoAntesDeDespues]{fechaHasta(r) > fechaDesde(r)}
+\end{tipo}

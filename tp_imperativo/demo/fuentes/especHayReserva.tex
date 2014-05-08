@@ -1,0 +1,11 @@
+\begin{problema}{hayReserva}{list: [T], this: Hotel}{\bool}    
+    \asegura {result = (\exists j \selec [0..|reservas(this)|)) esReservaValida(snd(ingreso), reservas(this)_j , fst(ingreso), checkout)}	
+	\aux{esReservaValida}{Habitacion hab, Reserva reserva, CheckIn checkIn, CheckOut checkOut}{\bool}
+	{
+		((documento(reserva) == fst(checkIn) \land
+        (fechaDesde(reserva) == snd(checkIn)) \land
+        (fechaHasta(reserva) == snd(checkOut)) \land
+        (tipo(reserva) ==  tipo(hab)) \land
+        (confirmada(reserva)));
+	}
+\end{problema}   

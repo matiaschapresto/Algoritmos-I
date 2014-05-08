@@ -1,0 +1,22 @@
+\begin{problema}{desRegistrarHuesped}{h: Hotel, d: DNI, f:Fecha}{}
+	\requiere[estaHospedado]{d \in huespedes(h)}
+	\requiere{seQuedoAlMenosUnDia(checkInAsociado(h,checkout(d, f)), checkout(d, f))}
+	\medskip
+	
+	\modifica{h}
+	\asegura[mismoNombre]{nombre(h) == nombre(pre(h))}
+	\asegura[mismaCadena]{cadena(h) == cadena(pre(h))}
+	\asegura[mismasHabitaciones]{mismos(habitaciones(h),habitaciones(pre(h)))}
+	\asegura[mismosIngresos]{mismos(ingresos(h), ingresos(pre(h)))}
+	\asegura[mismasReservas]{mismos(reservas(h), reservas(pre(h)))}
+	\asegura[mismasTarifas]{mismos(tarifaHabitacionXDia(h), tarifaHabitacionXDia(pre(h)))}
+	\asegura[mismosAccesorios]{mismos(precioAccesorio(h), precioAccesorio(pre(h)))}
+	\medskip
+	
+	\asegura{mismos(salidas(h), checkout(d,f):salidas(pre(h)))}
+	\asegura{mismos(huespedes(h), listaSinElemento(huespedes(pre(h)), d))}
+	\medskip
+	
+	\aux{checkout}{d: DNI, f: Fecha}{CheckOut}{(d,f)}
+	\aux{checkInAsociado}{h: Hotel, co: CheckOut}{CheckIn}{cab(obtenerCheckInsAsociados(h, co))}
+\end{problema}

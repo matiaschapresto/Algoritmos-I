@@ -1,0 +1,24 @@
+\begin{problema}{calcularCuenta}{h: Hotel, i: CheckIn, o: CheckOut, hb: Habitacion}{Dinero} 
+	\requiere[]{(i,hb) \in ingresos(h)}
+	\requiere{esCheckInAsociado(h, o, i)}
+	\medskip
+	
+	\asegura[]{result == 
+	    (totalDias(i, o) * precioHabitacion(h, hb) + importePorAccesorios(h, hb))
+	}
+	\medskip
+	%auxiliares	
+	\aux{totalDias}{i: CheckIn, o: CheckOut}{\ent}
+	{
+	  fechaCheckOut(o) - fechaCheckIn(i)
+	}
+	\aux{precioDeHabitacion}{h: Hotel, hb: Habitacion}{\ent}
+	{
+	  cab(\comp{sgd(x)}{x \selec tarifaHabitacionXDia(h),\\tipo(hb) == prm(x)})
+	}
+	\aux{importePorAccesorios}{h: Hotel, hb: Habitacion}{\ent}
+	{
+	  \\
+	  \sum{\comp{sgd(ap)}{ap \selec precioAccesorio(h), prm(ap) \in accesorios(h)}}
+	}
+\end{problema}

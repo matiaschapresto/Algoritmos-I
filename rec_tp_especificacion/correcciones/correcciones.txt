@@ -1,0 +1,7 @@
+OK	Marcar lo que es consigna y lo que esta hecho por nosotros (invariantes y aux)
+OK	sobreReservado
+OK      poco declarativo en fusionAutorizada(agregar nombre a los req y asegura)
+OK	registrarHuesped
+OK	huespedesConPalabra
+* ver temas de scope y variables ligadas con aux dentro y fuera de los problemas
+* alfabeticas aux y mover las que solo se usan en un problema a dicho problema
