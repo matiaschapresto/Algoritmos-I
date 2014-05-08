@@ -13,3 +13,5 @@ Repository for practical works developed during the subject Algorithms and Data 
 * Basic pointers and dynamic memory usage.
 * Loops - Construction, termination and correctness.
 * Floyd-Hoare logic for programs correctness
+
+For more information follow this link(spanish only) http://www.dc.uba.ar/materias/aed1/2014/1c/programa
