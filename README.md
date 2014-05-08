@@ -1,4 +1,15 @@
 Algoritmos-I
 ============
 
-Repository for practical works developed during the subject Algorithms and Data Structures I. In this subject were treated topics like Problems specification in terms of pre and post conditions and contracts, functional programming in haskell, Abstract Data Types, Algebraic Data Types, Imperative programs correctness and termination proofs with invariant theorem.
+Repository for practical works developed during the subject Algorithms and Data Structures I. In this subject were treated topics like:
+
+* Program Specification using contracts(pre and post conditions)
+* Algebraic and abstract data types
+* Basic functional programming and recursion
+* The List data type and problem solving using lists
+* Functional programs termination proofs, usually via induction.
+* Basic imperative programming using C++. 
+* The Array data type.
+* Basic pointers and dynamic memory usage.
+* Loops - Construction, termination and correctness.
+* Floyd-Hoare logic for programs correctness
